@@ -12,6 +12,33 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+//Handles POST to the medical provider table to add a new medical provider
+//The password is encrypted before being inserted into the database
+router.post('/addprovider', (req, res, next) => {
+
+    console.log('this is the new provider', req.body);
+    // pull out the incoming object data
+      const organizational_id = req.body.organizational_id;
+      const username = req.body.username;
+      const password = encryptLib.encryptPassword(req.body.password);
+      const first_name = req.body.first_name;
+      const middle_name = req.body.middle_name;
+      const last_name = req.body.last_name;
+      const date_of_birth = req.body.date_of_birth;
+      const employee_num = req.body.employee_num;
+      const job_title = req.body.job_title;
+      const specialty_title = req.body.specialty_title;
+      const department_name = req.body.department_name;
+
+      const queryText = `INSERT INTO "medical_providers" 
+                (organizational_id, username, password, first_name, middle_name, last_name, date_of_birth, employee_num,  job_title, specialty_title, department_name)
+                VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id`;
+          pool.query(queryText, [organizational_id, username, password, first_name, middle_name, last_name, date_of_birth, employee_num, job_title, specialty_title, department_name])
+            .then(() => res.sendStatus(201))
+            .catch(() => res.sendStatus(500));
+});
+
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted

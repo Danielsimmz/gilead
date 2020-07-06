@@ -32,10 +32,26 @@ const registrationMessage = (state = '', action) => {
   }
 };
 
+
+
+const addProviderError = (state = '', action) => {
+  switch(action.type){
+    case 'CLEAR_ADD_PROVIDER_ERROR':
+      return '';
+    case 'ADD_PROVIDER_ERROR':
+      return 'Make sure all the fields are filled out!';
+    case 'PROVIDER_REGISTRATION_FAILED':
+      return 'Oops! That didn\'t work. The new provider info not saved successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  addProviderError,
 });
