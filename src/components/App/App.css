@@ -7,10 +7,10 @@ body {
     background-color: #ff4545;
     margin: 50px;
 }
-
+/* 
 form {
     background-color: #dbd5d5;
-    width: 30%;
+    width: 40%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
@@ -20,7 +20,19 @@ form {
 input {
     margin: 5px;
     margin-bottom: 10px;
+} */
+
+
+input {
+    margin-bottom: 10px;
 }
+
+form {
+    width: 90%;
+    margin: 5% auto;
+    padding:0;
+}
+
 
 .log-in, .log-out, .register {
   background-color: #00acb0;
