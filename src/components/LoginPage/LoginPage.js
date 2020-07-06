@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from 'react-bootstrap/Row'
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card'
+
 
 class LoginPage extends Component {
   state = {
@@ -40,48 +46,35 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
-        </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
+
+
+
+         <h1 style={{   width: '50%', margin: '2% 30%' }}>Welcome To GileadMed</h1>
+        
+      <Card border = "success" style={{ width: '50%', margin: '3% auto' }} >
+      <Form >  
+          <Row>
+            <Col>
+              <Form.Control placeholder="Username" type="text" name="Username" value={this.state.username} onChange={this.handleInputChangeFor('username')}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Control placeholder="Password" type="text" name="Password" value={this.state.password} onChange={this.handleInputChangeFor('password')}/>
+            </Col>
+          </Row>
+        
+          <Button onClick={(event)=>this.login(event)} variant="primary" type="submit" style={{ width: '40%', margin: '0 30%' }}>
+            Log In
+          </Button>
+        </Form>
+      </Card>
+        <div>
+          <p style={{ width: '100%', margin: '1% 40%' }}>Don't Have An Account With Us?</p>
+          <Button variant="success" style={{ width: '20%', margin: '0 40%' }} type="button" onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}>
             Register
-          </button>
-        </center>
+          </Button>
+        </div>
       </div>
     );
   }

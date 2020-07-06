@@ -7,7 +7,8 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <img className="gilead" src="images/gilead.png" alt="gilead balm"/>
+      <h1 className="nav-title">GileadMed</h1>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
