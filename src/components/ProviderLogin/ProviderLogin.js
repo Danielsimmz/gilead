@@ -7,7 +7,9 @@ import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card'
 
 
-class LoginPage extends Component {
+//This component is for the provider logging in at the specified route
+//In our case, the route will be /sanfordhealth
+class ProviderLogin extends Component {
   state = {
     username: '',
     password: '',
@@ -18,14 +20,14 @@ class LoginPage extends Component {
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
-        type: 'LOGIN',
+        type: 'PROVIDER_LOGIN',
         payload: {
           username: this.state.username,
           password: this.state.password,
         },
       });
     } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      this.props.dispatch({ type: 'PROVIDER_LOGIN_INPUT_ERROR' });
     }
   } // end login
 
@@ -38,12 +40,12 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        {this.props.errors.loginMessage && (
+        {this.props.errors.loginProvider && (
           <h2
             className="alert"
             role="alert"
           >
-            {this.props.errors.loginMessage}
+            {this.props.errors.loginProvider}
           </h2>
         )}
 
@@ -70,10 +72,7 @@ class LoginPage extends Component {
         </Form>
       </Card>
         <div>
-          <p style={{ width: '100%', margin: '1% 40%' }}>Don't Have An Account With Us?</p>
-          <Button variant="success" style={{ width: '20%', margin: '0 40%' }} type="button" onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}>
-            Register
-          </Button>
+          <p style={{ width: '100%', margin: '1% 40%' }}>Failing to Log in? Contact your system administrator for further assistance</p>
         </div>
       </div>
     );
@@ -87,4 +86,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(ProviderLogin);

@@ -65,7 +65,7 @@ class RegisterPage extends Component {
           </h2>
         )}
         
-        <h1 style={{   width: '50%', margin: '1% 30%' }}>Welcome To GileadMed</h1>
+        <h1 style={{   width: '50%', margin: '1% 30%' }}>Welcome To GileadMD</h1>
         
       <Card border = "primary" style={{ width: '60%', margin: '3% auto' }} >
 

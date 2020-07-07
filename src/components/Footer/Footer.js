@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; GileadMed Records
+    &copy; GileadMD Records
   </footer>
 );
 

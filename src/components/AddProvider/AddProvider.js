@@ -86,7 +86,7 @@ class AddProvider extends Component {
             {this.props.errors.addProviderError}
           </h2>
         )}
-       <h1 style={{   width: '50%', margin: '2% 30%' }}>Welcome To GileadMed</h1>
+       <h1 style={{   width: '50%', margin: '2% 30%' }}>Welcome To GileadMD</h1>
         
       <Card border = "success" style={{ width: '50%', margin: '3% auto' }} >
       <Form >  

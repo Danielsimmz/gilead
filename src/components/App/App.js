@@ -11,8 +11,8 @@ import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProviderLogin from '../ProviderLogin/ProviderLogin';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Vitals from "../Vitals/Vitals";
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -40,6 +40,8 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+
+            <Route exact path="/sanfordhealth" component={ProviderLogin}/>
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

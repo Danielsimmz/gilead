@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 // loginMessage holds the string that will display
 // on the login screen if there's an error
+//when the organizational admin is trying to login
 const loginMessage = (state = '', action) => {
   switch (action.type) {
     case 'CLEAR_LOGIN_ERROR':
@@ -16,6 +17,28 @@ const loginMessage = (state = '', action) => {
       return state;
   }
 };
+
+
+
+//loginProvider holds the string that will display
+//on the login screen if there's an error 
+//when the provider is trying to login on their
+//organizational route
+const loginProvider = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_PROVIDER_LOGIN_ERROR':
+      return '';
+    case 'PROVIDER_LOGIN_INPUT_ERROR':
+      return 'Enter your username and password!';
+    case 'PROVIDER_LOGIN_FAILED':
+      return 'Oops! The username and password didn\'t match. Try again!';
+    case 'PROVIDER_LOGIN_FAILED_NO_CODE':
+      return 'Oops! Something went wrong! Is the server running?';
+    default:
+      return state;
+  }
+};
+
 
 // registrationMessage holds the string that will display
 // on the registration screen if there's an error
@@ -54,4 +77,5 @@ export default combineReducers({
   loginMessage,
   registrationMessage,
   addProviderError,
+  loginProvider,
 });
