@@ -7,11 +7,10 @@ const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
 
 const passport = require('./strategies/user.strategy');
-const providerPassport = require('./strategies/provider.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const providerRouter = require('./routes/provider.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,13 +23,11 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// start up providerPassport sessions
-app.use(providerPassport.initialize());
-app.use(providerPassport.session());
+
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/provider', providerRouter);
+
 
 // Serve static files
 app.use(express.static('build'));

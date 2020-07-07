@@ -30,12 +30,23 @@ router.post('/addprovider', (req, res, next) => {
       const specialty_title = req.body.specialty_title;
       const department_name = req.body.department_name;
 
+      //initialize the id you will get from the provider
+      let provider_id = '';
+
       const queryText = `INSERT INTO "medical_providers" 
                 (organizational_id, username, password, first_name, middle_name, last_name, date_of_birth, employee_num,  job_title, specialty_title, department_name)
                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id`;
           pool.query(queryText, [organizational_id, username, password, first_name, middle_name, last_name, date_of_birth, employee_num, job_title, specialty_title, department_name])
-            .then(() => res.sendStatus(201))
-            .catch(() => res.sendStatus(500));
+            .then((result) => {
+              console.log('this is the response', result.rows[0].id);
+              provider_id = result.rows[0].id;
+              //now lets add provider information to the user table (provider gets clearance of 1)
+              const query2Text = 'INSERT INTO "user" (username, password, user_type, clearance_level, organization_id, provider_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+              pool.query(query2Text, [username, password, 'provider', 2, 0, provider_id])
+                .then(() => res.sendStatus(201))
+                .catch(() => res.sendStatus(500))
+
+            }).catch(() => res.sendStatus(500));
 });
 
 
@@ -54,12 +65,22 @@ console.log('this is', req.body);
   const admin_phone_number = req.body.phoneNumber;
   const organizational_url = req.body.customUrl;
 
-  
+  //initialize the id returned from inserting a new organization in a table
+  let organization_id = '';
 
  const queryText = 'INSERT INTO "organizations" (username, password, organization_name, admin_email, admin_phone_number, admin_first_name, admin_middle_name, admin_last_name, organizational_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id';
   pool.query(queryText, [username, password, organization_name, admin_email, admin_phone_number, admin_first_name, admin_middle_name, admin_last_name, organizational_url])
-    .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .then((result) => {
+      console.log('this is the response', result.rows[0].id);
+      organization_id = result.rows[0].id;
+      //now lets add admin information to the user table (admin gets clearance of 1)
+      const query2Text = 'INSERT INTO "user" (username, password, user_type, clearance_level, organization_id, provider_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+      pool.query(query2Text, [username, password, 'admin', 1, organization_id, 0])
+        .then(() => res.sendStatus(201))
+        .catch(() => res.sendStatus(500))
+      }).catch(() => res.sendStatus(500));
+
+      
 });
 
 // Handles login form authenticate/login POST

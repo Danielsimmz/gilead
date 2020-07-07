@@ -12,6 +12,7 @@ function* loginUser(action) {
       withCredentials: true,
     };
 
+    console.log('about to login, whoop whoop', action.payload);
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
