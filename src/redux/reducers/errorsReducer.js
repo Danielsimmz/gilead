@@ -70,6 +70,20 @@ const addProviderError = (state = '', action) => {
   }
 }
 
+
+const addPatientError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_PATIENT_ERROR':
+      return '';
+    case 'ADD_PATIENT_ERROR':
+      return 'Make sure all the fields are filled out!';
+    case 'PATIENT_REGISTRATION_FAILED':
+      return 'Oops! That didn\'t work. The new patient info not saved successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
@@ -78,4 +92,5 @@ export default combineReducers({
   registrationMessage,
   addProviderError,
   loginProvider,
+  addPatientError,
 });
