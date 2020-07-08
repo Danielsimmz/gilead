@@ -43,11 +43,11 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
+           { (this.props.user.clearance_level === 1)? <ProtectedRoute
               exact
               path="/AddProvider"
               component={AddProvider}
-            />
+            />: ''}
 
           
             {/* If none of the other routes matched, we will show a 404. */}
@@ -62,4 +62,9 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = (state) => {
+    return {
+      user: state.user,
+    }
+}
+export default connect(mapStateToProps)(App);

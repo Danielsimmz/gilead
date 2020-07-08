@@ -12,26 +12,30 @@ const Nav = (props) => (
       <h1 className="nav-title">GileadMD</h1>
     </Link>
     <div className="nav-right">
-     <span className="nav-link">Provider</span> 
-      <Link className="nav-link" to="/home">
+     
+     
+      {/* Show the link to the info page and the logout button if the user is logged in */}
+      {props.user.id && (
+        <>
+        <LogOutButton className="nav-link"/>
+         {(props.user.clearance_level === 1)?<Link className="nav-link" to="/AddProvider">
+            Add Provider
+          </Link>: ''} 
+          
+        </>
+      )}
+
+       {/* Always show this link since the about page is not protected */}
+      <Link className="nav-link" to="/about">
+        About
+      </Link>
+       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/AddProvider">
-            Add Provider
-          </Link>
-          <LogOutButton className="nav-link"/>
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
+     
     
     </div>
   </div>

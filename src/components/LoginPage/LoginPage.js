@@ -84,7 +84,6 @@ class LoginPage extends Component {
            <p style={{ width: '100%', margin: '3% 44% 0' }}> {(this.state.count%2 !== 0)? this.state.isAdmin: this.state.isProvider} </p>
            <Button variant="info" style={{ width: '20%', margin: '.5% 40%'  }} type="button" 
            onClick={() => {
-             this.props.dispatch({type: 'SET_TO_PROVIDER_LOGIN_MODE'}) 
              let count = this.state.count
              count +=1
              this.setState({
