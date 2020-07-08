@@ -1,9 +1,8 @@
 import React from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import DomainApp from '../../domainComponents/DomainApp/DomainApp';
+import ProviderLogin from '../ProviderLogin/ProviderLogin';
+
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -22,27 +21,20 @@ const ProtectedRoute = (props) => {
     // Alias prop 'component' as 'ComponentToProtect'
     component: ComponentToProtect,
     user,
-    loginMode,
     providerloginMode,
     ...otherProps
   } = props;
 
   let ComponentToShow;
 
-  if(user.id) {
+  if (user.provider_id !== 0) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
-  } else if (loginMode === 'login') {
+  } else if (user.provider_id === 0 || user.provider_id === undefined || user.provider_id === null) {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
-    ComponentToShow = LoginPage;
-  } else if(providerloginMode === 'loginPage'){
-      ComponentToShow = DomainApp;
-  }else {
-    // the the user is not logged in and the mode is not 'login'
-    // show the RegisterPage
-    ComponentToShow = RegisterPage;
+    ComponentToShow = ProviderLogin;
   } 
 
   // We return a Route component that gets added to our list of routes
@@ -63,7 +55,6 @@ const ProtectedRoute = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    loginMode: state.loginMode,
     providerloginMode: state.providerloginMode,
   }
 }

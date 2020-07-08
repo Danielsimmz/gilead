@@ -67,7 +67,7 @@ class RegisterPage extends Component {
         
         <h1 style={{   width: '50%', margin: '1% 30%' }}>Welcome To GileadMD</h1>
         
-      <Card border = "primary" style={{ width: '60%', margin: '3% auto' }} >
+      <Card border = "primary" style={{ width: '60%', margin: '1% auto' }} >
 
       <Form >  
           <Row>
@@ -114,16 +114,20 @@ class RegisterPage extends Component {
         
          
           <Button onClick={(event)=>this.registerUser(event)} variant="success" type="submit" style={{ width: '40%', margin: '0 30%' }}>
-            Submit
+            Submit Admin Registration
           </Button>
         </Form>
       </Card>
 
        
         <div>
-          <p style={{ width: '100%', margin: '1% 40%' }}>Already Have An Account With Us?</p>
+          <p style={{ width: '100%', margin: '0 40%' }}>Already Have An Account With Us?</p> 
           <Button variant="primary" style={{ width: '20%', margin: '0 40%' }} type="button" onClick={() => {this.props.dispatch({ type: "SET_TO_LOGIN_MODE" })}}>
-            Login
+            Log in as an Admin
+          </Button>
+           <p style={{ width: '100%', margin: '1% 45% 0' }}>Are You A Provider?</p>
+           <Button variant="info" style={{ width: '20%', margin: '0 40%'  }} type="button" onClick={() => {this.props.dispatch({type: 'SET_TO_PROVIDER_LOGIN_MODE'})}}>
+            Log In As A Provider
           </Button>
         </div>
         

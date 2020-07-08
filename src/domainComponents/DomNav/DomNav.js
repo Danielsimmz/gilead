@@ -1,38 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+import LogOutButtonProvider from '../LogOutButtonProvider/LogOutButtonProvider';
+import './DomNav.css';
 
-
-const Nav = (props) => (
+const DomNav = (props) => (
   <div className="nav">
-    <Link to="/home">
+    <Link to="/sanfordhealth">
       <img className="gilead" src="images/gilead.png" alt="gilead balm"/>
       <h1 className="nav-title">GileadMD</h1>
     </Link>
     <div className="nav-right">
-     <span className="nav-link">Provider</span> 
-      <Link className="nav-link" to="/home">
+      <Link className="nav-link" to="/sanfordhealth">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
+        {(props.user.clearance_level === 2) ? 'Home' : 'Login'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
+      {props.user.clearance_level === 2 && (
         <>
-          <Link className="nav-link" to="/AddProvider">
-            Add Provider
+          <Link className="nav-link" to="/vitals">
+            Vitals
           </Link>
-          <LogOutButton className="nav-link"/>
+          <LogOutButtonProvider className="nav-link"/>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
+      <Link className="nav-link" to="/sanfordhealth/about">
         About
       </Link>
-    
+      
+
+      
     </div>
   </div>
 );
@@ -44,7 +44,6 @@ const Nav = (props) => (
 // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
-  providerloginMode: state.providerloginMode,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(DomNav);
