@@ -72,38 +72,47 @@ class RegisterPage extends Component {
       <Form >  
           <Row>
             <Col>
+                <Form.Label>First Name</Form.Label>
               <Form.Control placeholder="First name" type="text" name="First name" value={this.state.firstName} onChange={this.handleInputChangeFor('firstName')}/>
             </Col>
             <Col>
+                <Form.Label>Middle Name</Form.Label>
               <Form.Control placeholder="Middle name" type="text" name="Middle name" value={this.state.middleName} onChange={this.handleInputChangeFor('middleName')} />
             </Col>
-            <Col>
+            <Col>    
+                <Form.Label>Last Name</Form.Label>
               <Form.Control placeholder="Last name" type="text" name="Last name" value={this.state.lastName} onChange={this.handleInputChangeFor('lastName')} />
             </Col>
           </Row>
           <Row>
             <Col>
+                <Form.Label>Username</Form.Label>
              < Form.Control placeholder = "Username" type="text" name="Username" value={this.state.username} onChange={this.handleInputChangeFor('username')} />
             </Col>
              <Col>
+                 <Form.Label>Password</Form.Label>
              < Form.Control placeholder = "Password" type="text" name="Password" value={this.state.password} onChange={this.handleInputChangeFor('password')} />
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col>   
+                 <Form.Label>Email</Form.Label>
              < Form.Control placeholder = "Email" type="text" name="Email" value={this.state.email} onChange={this.handleInputChangeFor('email')}/>
             </Col>
              <Col>
+                 <Form.Label>Phone Number</Form.Label>
              < Form.Control placeholder = "Phone Number" type="tel" name="Phone Number" value={this.state.phoneNumber} onChange={this.handleInputChangeFor('phoneNumber')} />
             </Col>
           </Row>
           <Row>
             <Col>
+                <Form.Label>Company Name</Form.Label>
             < Form.Control placeholder = "Company Name" type="text" name= "Company Name"  value={this.state.companyName} onChange={this.handleInputChangeFor('companyName')} />
             </Col>
           </Row>
           <Row>
             <Col>
+                <Form.Label > Enter Your Custom URL Ending  (ps: Your url will be https: //gileadmed/yourinput)</Form.Label>
             <Form.Control placeholder = "Enter Custom URL Ending    (ps: Your url will be https://gileadmed/yourinput)" 
             type="text" 
             name="Custom Url" 

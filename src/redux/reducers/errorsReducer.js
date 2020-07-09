@@ -19,6 +19,21 @@ const loginMessage = (state = '', action) => {
 };
 
 
+const searchMessage = (state='', action) => {
+
+    switch (action.type){
+      case 'CLEAR_SEARCH_ERROR':
+        return '';
+      case 'SEARCH_INPUT_ERROR':
+        return 'Oops, No Bueno! Try Again, Make Sure All The Fields Are Filled In!';
+      case 'PATIENT_SEARCH_FAILED':
+      return 'Oops! That didn\'t work. Your patient search info is a no go. Uno mas, Try again!';
+      default: 
+        return state;
+    }
+}
+
+
 
 //loginProvider holds the string that will display
 //on the login screen if there's an error 
@@ -84,6 +99,36 @@ const addPatientError = (state = '', action) => {
   }
 }
 
+
+const updatePatientError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_UPDATE_PATIENT_ERROR':
+      return '';
+    case 'UPDATE_PATIENT_ERROR':
+      return 'Make sure all the fields are filled out!';
+    case 'PATIENT_UPDATE_FAILED':
+      return 'Oops! That didn\'t work. The new patient info not saved successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
+
+const deletePatientError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_DELETE_PATIENT_ERROR':
+      return '';
+    case 'DELETE_PATIENT_ERROR':
+      return 'Sorry Try Again!';
+    case 'PATIENT_DELETION_FAILED':
+      return 'Oops! That didn\'t work. The new patient info not deleted successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
+
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
@@ -93,4 +138,7 @@ export default combineReducers({
   addProviderError,
   loginProvider,
   addPatientError,
+  updatePatientError,
+  searchMessage,
+  deletePatientError,
 });

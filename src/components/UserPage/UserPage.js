@@ -16,6 +16,10 @@ const UserPage = (props) => (
   <Link to='/addpatient'>
   Add A Patient
   </Link>
+
+  <Link to='/searchpatient'>
+    Search For A Patient
+  </Link>
   </div>
 );
 

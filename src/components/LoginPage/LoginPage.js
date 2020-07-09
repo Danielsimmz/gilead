@@ -62,11 +62,13 @@ class LoginPage extends Component {
       <Form >  
           <Row>
             <Col>
+                <Form.Label>Username</Form.Label>
               <Form.Control placeholder="Username" type="text" name="Username" value={this.state.username} onChange={this.handleInputChangeFor('username')}/>
             </Col>
           </Row>
           <Row>
             <Col>
+                <Form.Label>Password</Form.Label>
               <Form.Control placeholder="Password" type="text" name="Password" value={this.state.password} onChange={this.handleInputChangeFor('password')}/>
             </Col>
           </Row>

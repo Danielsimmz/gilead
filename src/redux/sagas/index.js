@@ -3,8 +3,9 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import addProviderSaga from './addProviderSaga';
-import addPatientSaga from './addPatientSaga';
+import PatientSaga from './PatientSaga';
 import providerLoginSaga from './providerLoginSaga';
+import searchSaga from './searchSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,7 +20,8 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     addProviderSaga(),
-    addPatientSaga(),
+    PatientSaga(),
     providerLoginSaga(),
+    searchSaga(),
   ]);
 }

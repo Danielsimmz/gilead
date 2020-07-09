@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from 'react-bootstrap/Row'
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 class AddPatient extends Component {
 
@@ -89,6 +90,67 @@ class AddPatient extends Component {
     }
   } // end registerPatient
 
+
+
+  updatePatient = (event) => {
+    event.preventDefault();
+
+    console.log( 'we are about to send the state', this.state);
+
+    if (this.state.first_name && this.state.middle_name && this.state.last_name && this.state.date_of_birth &&
+        this.state.phone_number && this.state.email && this.state.physical_address && this.state.occupation &&
+        this.state.mailing_address && this.state.next_of_kin_first_name && this.state.next_of_kin_last_name &&
+        this.state.next_of_kin_phone_number && this.state.next_of_kin_email && this.state.sex && this.state.mass &&
+        this.state.height && this.state.allergies && this.state.age && this.state.patient_alive && this.state.medical_aid_provider &&
+        this.state.medical_aid_number && this.state.patient_religion && this.state.marital_status && this.state.next_of_kin_relationship &&
+        this.state.father_first_name && this.state.father_middle_name && this.state.father_last_name && this.state.employer &&
+        this.state.mother_first_name && this.state.mother_middle_name && this.state.mother_last_name){
+
+        
+
+//send the updated patient to the server through a redux saga
+      this.props.dispatch({
+        type: 'UPDATE_PATIENT',
+        payload: {
+          first_name: this.state.first_name, middle_name: this.state.middle_name, last_name: this.state.last_name, date_of_birth: this.state.date_of_birth, profile_picture: this.state.profile_picture, 
+          phone_number: this.state.phone_number, email: this.state.email, physical_address: this.state.physical_address, mailing_address: this.state.mailing_address, next_of_kin_first_name: this.state.next_of_kin_first_name,
+          next_of_kin_last_name: this.state.next_of_kin_last_name, next_of_kin_phone_number: this.state.next_of_kin_phone_number, next_of_kin_email: this.state.next_of_kin_email, next_of_kin_relationship: this.state.next_of_kin_relationship,
+          sex: this.state.sex, mass: this.state.mass, height: this.state.height, allergies: this.state.allergies, age: this.state.age, patient_alive: this.state.patient_alive, medical_aid_provider: this.state.medical_aid_provider, 
+          medical_aid_number: this.state.medical_aid_number, patient_religion: this.state.patient_religion, marital_status: this.state.marital_status, father_first_name: this.state.father_first_name, father_middle_name: this.state.father_middle_name, 
+          father_last_name: this.state.father_last_name, mother_first_name: this.state.mother_first_name, mother_middle_name: this.state.mother_middle_name, 
+          mother_last_name: this.state.mother_last_name, occupation: this.state.occupation, employer: this.state.employer, id: this.props.patientid
+        },
+      });
+
+        this.props.dispatch({
+          type: 'SEARCH_PATIENT',
+          payload: {
+            first_name: this.state.first_name,
+            middle_name: this.state.middle_name,
+            last_name: this.state.last_name,
+            sex: this.state.sex,
+            date_of_birth: this.state.date_of_birth
+          },
+        });
+
+
+      this.setState({
+       first_name: '', middle_name: '', last_name: '', date_of_birth: '', profile_picture: '', phone_number: '', email: '',
+       physical_address: '', mailing_address: '', next_of_kin_first_name: '', next_of_kin_last_name: '', next_of_kin_phone_number: '',
+       next_of_kin_email: '', next_of_kin_relationship: '', sex: '', mass: '', height: '', allergies: '', age: '',
+       patient_alive: '', medical_aid_provider: '', medical_aid_number: '', patient_religion: '', marital_status: '',
+       father_first_name: '', father_middle_name: '', father_last_name: '', mother_first_name: '', mother_middle_name: '',
+       mother_last_name: '', occupation: '', employer: ''
+      });
+
+     
+    } else {
+      this.props.dispatch({type: 'UPDATE_PATIENT_ERROR'});
+    }
+  } // end updatePatient
+
+
+
 //This function handles storing input values into state on change
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -104,7 +166,12 @@ class AddPatient extends Component {
             {this.props.errors.addPatientError}
           </h2>
         )}
-       <h1 style={{   width: '50%', margin: '2% 30%' }}>Add Patient Biography</h1>
+        {this.props.errors.updatePatientError && (<h2 className="alert" role="alert" > {this.props.errors.updatePatientError}</h2>)}
+
+
+       {(this.props.patientSearch)? <h1 style={{   width: '50%', margin: '2% 30%' }}>Update Patient Biography</h1>:
+       <h1 style={{   width: '50%', margin: '2% 30%' }}>Add Patient Biography</h1>}
+       
         
       <Card border = "info" style={{ width: '90%', margin: '3% auto' }} >
       <Form >  
@@ -278,9 +345,10 @@ class AddPatient extends Component {
             </Col>
           </Row>
         
-          <Button onClick={(event)=>this.registerPatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>
+          {(this.props.patientSearch)? <Link to='/home'><Button onClick={(event)=>this.updatePatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>Update Patient</Button></Link>:
+            <Button onClick={(event)=>this.registerPatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>
             Add Patient
-          </Button>
+          </Button>}
         </Form>
       </Card>
       </div>
