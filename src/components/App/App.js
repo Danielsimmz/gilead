@@ -10,6 +10,7 @@ import UserPage from '../UserPage/UserPage';
 import AddProvider from '../AddProvider/AddProvider';
 import AddPatient from '../AddPatient/AddPatient';
 import SearchPatient from '../SearchPatient/SearchPatient';
+import SearchProvider from '../SearchProvider/SearchProvider';
 import './App.css';
 
 
@@ -50,6 +51,8 @@ class App extends Component {
               path="/AddProvider"
               component={AddProvider}
             />: ''}
+
+            <ProtectedRoute exact path ='/searchprovider' component={SearchProvider}/>
             <ProtectedRoute exact path ='/searchpatient' component={SearchPatient}/>
             <ProtectedRoute exact path='/addpatient' component={AddPatient}/>
             {/* If none of the other routes matched, we will show a 404. */}

@@ -18,9 +18,6 @@ const Nav = (props) => (
       {props.user.id && (
         <>
         <LogOutButton className="nav-link"/>
-         {(props.user.clearance_level === 1)?<Link className="nav-link" to="/AddProvider">
-            Add Provider
-          </Link>: ''} 
           
         </>
       )}

@@ -27,8 +27,30 @@ function* searchPatient (action) {
 
 
 
+function* searchForProvider (action) {
+    try{
+        //clear any errors on the page before
+        yield put ({ type: 'CLEAR_PROVIDER_SEARCH_ERROR' });
+
+         console.log('we are about to send data for a provider search', action.payload);
+       
+         //passes the incoming search query terms from the payload to the server
+       const response = yield axios.get(`/api/provider/searchprovider/?first_name=${action.payload.first_name}&middle_name=${action.payload.middle_name}&last_name=${action.payload.last_name}&job_title=${action.payload.job_title}&department_name=${action.payload.department_name}`);
+
+       yield put ({type: 'SET_PROVIDER_SEARCH', payload: response.data});
+
+       console.log('Here are the search results for the provider search', response.data);
+    }catch(error){
+        console.log('Error with provider search:', error);
+        yield put ({ type: 'PROVIDER_SEARCH_FAILED' });
+    }
+}
+
+
+
 function* searchSaga() {
     yield takeLatest('SEARCH_PATIENT', searchPatient);
+     yield takeLatest('SEARCH_PROVIDER', searchForProvider);
 }
 
 export default searchSaga;

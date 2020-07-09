@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
+
 class AddPatient extends Component {
 
       state = {
@@ -160,17 +161,24 @@ class AddPatient extends Component {
 
     render () {
       return (
+        
       <div>
-        {this.props.errors.addPatientError && (
-          <h2 className="alert" role="alert">
-            {this.props.errors.addPatientError}
-          </h2>
-        )}
+        <div className='navbuttonscontainer'>
+                  {(this.props.user.clearance_level === 1)&&
+                    <>
+                    <Link to="/AddProvider"><Button  variant="outline-success">Add Provider</Button></Link> {' '} 
+                    <Link to='/searchprovider'><Button  variant="outline-info">Search For A Provider</Button></Link> {' '}
+                    </>}
+              
+                <Link to='/addpatient'><Button  variant="outline-primary">Add A Patient</Button></Link> {' '}
+                <Link to='/searchpatient'> <Button variant="outline-secondary">Search For A Patient</Button></Link>
+        </div>
+        {this.props.errors.addPatientError && (<h2 className="alert" role="alert"> {this.props.errors.addPatientError}</h2>)}
         {this.props.errors.updatePatientError && (<h2 className="alert" role="alert" > {this.props.errors.updatePatientError}</h2>)}
 
 
-       {(this.props.patientSearch)? <h1 style={{   width: '50%', margin: '2% 30%' }}>Update Patient Biography</h1>:
-       <h1 style={{   width: '50%', margin: '2% 30%' }}>Add Patient Biography</h1>}
+       {(this.props.patientSearch)? <h1 style={{   width: '50%', margin: '2% 40%' }}>Update Patient Biography</h1>:
+       <h1 style={{   width: '50%', margin: '2% 40%' }}>Add Patient Biography</h1>}
        
         
       <Card border = "info" style={{ width: '90%', margin: '3% auto' }} >
@@ -345,7 +353,7 @@ class AddPatient extends Component {
             </Col>
           </Row>
         
-          {(this.props.patientSearch)? <Link to='/home'><Button onClick={(event)=>this.updatePatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>Update Patient</Button></Link>:
+          {(this.props.patientSearch)? <Button onClick={(event)=>this.updatePatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>Update Patient</Button>:
             <Button onClick={(event)=>this.registerPatient(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>
             Add Patient
           </Button>}

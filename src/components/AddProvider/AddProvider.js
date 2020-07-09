@@ -4,7 +4,8 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from 'react-bootstrap/Row'
 import Button from "react-bootstrap/Button";
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 
 class AddProvider extends Component {
@@ -28,7 +29,7 @@ class AddProvider extends Component {
 //We first validate the inputs to make sure we are not sending empty inputs to the server
       registerProvider = (event) => {
     event.preventDefault();
-
+console.log( 'we are about to send the sate for a provider add', this.state);
     if ( this.state.first_name && this.state.middle_name && this.state.last_name 
       && this.state.username && this.state.password && this.state.date_of_birth
       && this.state.employee_num && this.state.job_title && this.state.specialty_title
@@ -71,6 +72,67 @@ class AddProvider extends Component {
     }
   } // end registerProvider
 
+  updateProvider = (event) => {
+    event.preventDefault();
+      console.log( 'we are about to send the state for a provider update', this.state);
+
+      if ( this.state.first_name && this.state.middle_name && this.state.last_name 
+      && this.state.username && this.state.password && this.state.date_of_birth
+      && this.state.employee_num && this.state.job_title && this.state.specialty_title
+      && this.state.department_name){
+
+        //send the updated provider to the server through a redux saga
+          this.props.dispatch({
+                type: 'UPDATE_PROVIDER',
+                payload: {
+                    organizational_id: this.state.organizational_id,
+                    first_name: this.state.first_name,
+                    middle_name: this.state.middle_name,
+                    last_name: this.state.last_name,
+                    username: this.state.username,
+                    password: this.state.password,
+                    date_of_birth: this.state.date_of_birth,
+                    employee_num: this.state.employee_num,
+                    job_title: this.state.job_title,
+                    specialty_title: this.state.specialty_title,
+                    department_name: this.state.department_name,
+                    id: this.props.providerid
+                }
+          });
+
+            this.props.dispatch({
+              type: 'SEARCH_PROVIDER',
+              payload: {
+                first_name: this.state.first_name,
+                middle_name: this.state.middle_name,
+                last_name: this.state.last_name,
+                job_title: this.state.job_title,
+                department_name: this.state.department_name
+              },
+            });
+
+
+             this.setState({
+               organizational_id: this.props.user.id,
+               username: '',
+               password: '',
+               first_name: '',
+               middle_name: '',
+               last_name: '',
+               date_of_birth: '',
+               employee_num: '',
+               job_title: '',
+               specialty_title: '',
+               department_name: ''
+             });
+
+  }else{
+      this.props.dispatch({ type: 'UPDATE_PROVIDER_ERROR'});
+  } //end updateProvider
+}
+
+
+
 //This function handles storing input values into state on change
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -81,12 +143,21 @@ class AddProvider extends Component {
     render () {
       return (
       <div>
-        {this.props.errors.addProviderError && (
-          <h2 className="alert" role="alert">
-            {this.props.errors.addProviderError}
-          </h2>
-        )}
-       <h1 style={{   width: '50%', margin: '2% 30%' }}>Welcome To GileadMD</h1>
+            <div className='navbuttonscontainer'>
+                  {(this.props.user.clearance_level === 1)&&
+                    <>
+                    <Link to="/AddProvider"><Button  variant="outline-success">Add Provider</Button></Link> {' '} 
+                    <Link to='/searchprovider'><Button  variant="outline-info">Search For A Provider</Button></Link> {' '}
+                    </>}
+              
+                <Link to='/addpatient'><Button  variant="outline-primary">Add A Patient</Button></Link> {' '}
+                <Link to='/searchpatient'> <Button variant="outline-secondary">Search For A Patient</Button></Link>
+        </div>
+        {this.props.errors.addProviderError && (<h2 className="alert" role="alert">{this.props.errors.addProviderError}</h2>)}
+         {this.props.errors.updatePatientError && (<h2 className="alert" role="alert" > {this.props.errors.updatePatientError}</h2>)}
+
+       {(this.props.providerSearch)? <h1 style={{   width: '50%', margin: '2% 40%' }}>Update Provider Information</h1>:  
+       <h1 style={{   width: '50%', margin: '2% 40%' }}>Add A Provider</h1>}
         
       <Card border = "success" style={{ width: '50%', margin: '3% auto' }} >
       <Form >  
@@ -134,9 +205,9 @@ class AddProvider extends Component {
             </Col>
           </Row>
         
-          <Button onClick={(event)=>this.registerProvider(event)} variant="success" type="submit" style={{ width: '40%', margin: '0 30%' }}>
+          {(this.props.providerSearch)?<Button onClick={(event)=>this.updateProvider(event)} variant="success" type="submit" style={{ width: '40%', margin: '7% 30% 2%' }}>Update Provider</Button>:<Button onClick={(event)=>this.registerProvider(event)} variant="success" type="submit" style={{ width: '40%', margin: '0 30%' }}>
             Add Provider
-          </Button>
+          </Button>}
         </Form>
       </Card>
       </div>

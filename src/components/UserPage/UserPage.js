@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { Link } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
 
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
-const UserPage = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <LogOutButton className="log-in" />
-  <Link to='/addpatient'>
-  Add A Patient
-  </Link>
 
-  <Link to='/searchpatient'>
-    Search For A Patient
-  </Link>
-  </div>
-);
+class UserPage extends Component {
+
+          state = {
+
+          }
+
+          render () {
+                return (
+
+                  <div className='navbuttonscontainer'>
+                  {(this.props.user.clearance_level === 1)&&
+                    <>
+                    <Link to="/AddProvider"><Button  variant="outline-success">Add Provider</Button></Link> {' '} 
+                    <Link to='/searchprovider'><Button  variant="outline-info">Search For A Provider</Button></Link> {' '}
+                    </>}
+              
+                <Link to='/addpatient'><Button  variant="outline-primary">Add A Patient</Button></Link> {' '}
+                <Link to='/searchpatient'> <Button variant="outline-secondary">Search For A Patient</Button></Link>
+        </div>
+
+                );
+          }
+}
 
 // Instead of taking everything from state, we just want the user info.
 // if you wanted you could write this code like this:

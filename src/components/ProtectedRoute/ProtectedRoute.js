@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import DomainApp from '../../domainComponents/DomainApp/DomainApp';
+
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -23,7 +23,6 @@ const ProtectedRoute = (props) => {
     component: ComponentToProtect,
     user,
     loginMode,
-    providerloginMode,
     ...otherProps
   } = props;
 
@@ -37,9 +36,7 @@ const ProtectedRoute = (props) => {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
-  } else if(providerloginMode === 'loginPage'){
-      ComponentToShow = DomainApp;
-  }else {
+  } else {
     // the the user is not logged in and the mode is not 'login'
     // show the RegisterPage
     ComponentToShow = RegisterPage;
@@ -64,7 +61,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     loginMode: state.loginMode,
-    providerloginMode: state.providerloginMode,
   }
 }
 

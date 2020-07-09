@@ -50,9 +50,12 @@ function* deletePatient(action) {
         });
 
         //passes the incoming new patient user info from the payload to the server
-        yield axios.delete(`/api/patient/${action.payload}`);
+        yield axios.delete(`/api/patient/${action.payload.id}`);
 
-        console.log('we are about to delete the patiend with this id:', action.payload);
+        console.log('we are about to delete the patiend with this id:', action.payload.id);
+
+        yield put({ type: 'SEARCH_PATIENT', payload: action.payload })
+
     } catch (error) {
         console.log('Error with patient deletion:', error);
         yield put({

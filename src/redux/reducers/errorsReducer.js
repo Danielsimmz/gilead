@@ -34,6 +34,21 @@ const searchMessage = (state='', action) => {
 }
 
 
+const providerSearchError = (state= '', action) => {
+
+  switch (action.type) {
+    case 'CLEAR_PROVIDER_SEARCH_ERROR':
+      return '';
+    case 'PROVIDER_SEARCH_INPUT_ERROR':
+      return 'Oops, No Bueno! Try Again, Make Sure All The Fields Are Filled In!';
+    case 'PROVIDER_SEARCH_FAILED':
+      return 'Oops! That didn\'t work. Your provider search info is a no go. Uno mas, Try again!';
+    default:
+      return state;
+  }
+}
+
+
 
 //loginProvider holds the string that will display
 //on the login screen if there's an error 
@@ -113,6 +128,19 @@ const updatePatientError = (state = '', action) => {
   }
 }
 
+const updateProviderError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_UPDATE_PROVIDER_ERROR':
+      return '';
+    case 'UPDATE_PROVIDER_ERROR':
+      return 'Make sure all the fields are filled out!';
+    case 'PROVIDER_UPDATE_FAILED':
+      return 'Oops! That didn\'t work. The new provider info not saved successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
 
 const deletePatientError = (state = '', action) => {
   switch (action.type) {
@@ -121,7 +149,24 @@ const deletePatientError = (state = '', action) => {
     case 'DELETE_PATIENT_ERROR':
       return 'Sorry Try Again!';
     case 'PATIENT_DELETION_FAILED':
-      return 'Oops! That didn\'t work. The new patient info not deleted successfully. Try again!';
+      return 'Oops! That didn\'t work. The patient info not deleted successfully. Try again!';
+    default:
+      return state;
+  }
+}
+
+
+
+
+
+const deleteProviderError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_DELETE_PROVIDER_ERROR':
+      return '';
+    case 'DELETE_PROVIDER_ERROR':
+      return 'Sorry Try Again!';
+    case 'PROVIDER_DELETION_FAILED':
+      return 'Oops! That didn\'t work. The provider was info not deleted successfully. Try again!';
     default:
       return state;
   }
@@ -139,6 +184,9 @@ export default combineReducers({
   loginProvider,
   addPatientError,
   updatePatientError,
+  updateProviderError,
   searchMessage,
   deletePatientError,
+  providerSearchError,
+  deleteProviderError,
 });

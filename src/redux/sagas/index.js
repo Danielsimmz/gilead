@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
-import addProviderSaga from './addProviderSaga';
+import ProviderSaga from './ProviderSaga';
 import PatientSaga from './PatientSaga';
 import providerLoginSaga from './providerLoginSaga';
 import searchSaga from './searchSaga';
@@ -19,7 +19,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    addProviderSaga(),
+    ProviderSaga(),
     PatientSaga(),
     providerLoginSaga(),
     searchSaga(),

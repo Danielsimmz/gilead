@@ -6,55 +6,55 @@ import Col from "react-bootstrap/Col";
 import Row from 'react-bootstrap/Row';
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
-import moment from 'moment';
-import AddPatient from '../AddPatient/AddPatient';
+import AddProvider from '../AddProvider/AddProvider';
 import { Link } from 'react-router-dom';
 
 
 
-class SearchPatient extends Component {
+
+class SearchProvider extends Component {
 
     state = {
         first_name: '',
         middle_name: '',
         last_name: '',
-        sex: '',
-        date_of_birth: '',
+        job_title: '',
+        department_name: '',
         edit: false,
         id: ''
     }
 
 
-    searchPatient = (event) => {
+    searchProvider = (event) => {
     event.preventDefault();
 
-    if (this.state.first_name && this.state.middle_name && this.state.last_name && this.state.sex && this.state.date_of_birth) {
+    if (this.state.first_name && this.state.last_name && this.state.job_title ) {
       
         this.props.dispatch({
-        type: 'SEARCH_PATIENT',
+        type: 'SEARCH_PROVIDER',
         payload: {
            first_name: this.state.first_name,
             middle_name: this.state.middle_name,
             last_name: this.state.last_name,
-            sex: this.state.sex,
-            date_of_birth: this.state.date_of_birth
+            job_title: this.state.job_title,
+            department_name: this.state.department_name
         },
       });
   //empty inputs
 this.setState({
-     first_name: '',
-     middle_name: '',
-     last_name: '',
-     sex: '',
-     date_of_birth: '',
-     edit: false,
-     id: ''
+        first_name: '',
+         middle_name: '',
+         last_name: '',
+         job_title: '',
+         department_name: '',
+         edit: false,
+         id: ''
 })
       
     } else {
-      this.props.dispatch({ type: 'SEARCH_INPUT_ERROR' });
+      this.props.dispatch({ type: 'PROVIDER_SEARCH_INPUT_ERROR' });
     }
-  } //END of searchPatient
+  } //END of searchProvider
 
 
   handleInputChangeFor = propertyName => (event) => {
@@ -64,16 +64,17 @@ this.setState({
   }
 
 
-  //deletePatient takes in the patient id and dispatches it to the db 
-  deletePatient = (parameter) =>{
-       this.props.dispatch({type: 'DELETE_PATIENT', payload: parameter})
+  //deletePatient takes in the provider object and dispatches it to the db 
+  deleteProvider = (parameter) =>{
+       this.props.dispatch({type: 'DELETE_PROVIDER', payload: parameter})
   }
 
 
     render () {
         return (
                  <div>
-                     <div className='navbuttonscontainer'>
+          
+                <div className='navbuttonscontainer'>
                   {(this.props.user.clearance_level === 1)&&
                     <>
                     <Link to="/AddProvider"><Button  variant="outline-success">Add Provider</Button></Link> {' '} 
@@ -82,12 +83,13 @@ this.setState({
               
                 <Link to='/addpatient'><Button  variant="outline-primary">Add A Patient</Button></Link> {' '}
                 <Link to='/searchpatient'> <Button variant="outline-secondary">Search For A Patient</Button></Link>
-        </div>
-        {this.props.errors.searchMessage && (<h2 className="alert" role="alert" > {this.props.errors.searchMessage}</h2>)}
+              </div>
+
+        {this.props.errors.providerSearchError && (<h2 className="alert" role="alert" > {this.props.errors.providerSearchError}</h2>)}
 
 
 
-         <h1 style={{   width: '50%', margin: '2% 40%' }}>Search For A Patient</h1>
+         <h1 style={{   width: '50%', margin: '2% 40%' }}>Search For A Provider</h1>
         
       <Card border = "success" style={{ width: '60%', margin: '1% auto' }} >
       <Form >  
@@ -106,61 +108,55 @@ this.setState({
             </Col>
           </Row>
           <Row>
-            <Col>
-                <Form.Label>Sex</Form.Label>
-                <Form.Control as="select" onChange={(event)=>this.setState({sex: event.target.value})}>
-                     <option value="">Pick From Below</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                 </Form.Control>
+                 <Col>
+                <Form.Label>Job Title</Form.Label>
+              <Form.Control placeholder="Job Title" type="text" name="job_title" value={this.state.job_title} onChange={this.handleInputChangeFor('job_title')}/>
             </Col>
             <Col>
-                <Form.Label>Date Of Birth</Form.Label>
-              <Form.Control placeholder="Date Of Birth" type="date" name="date_of_birth" value={this.state.date_of_birth} onChange={this.handleInputChangeFor('date_of_birth')}/>
+                <Form.Label>Department Name</Form.Label>
+              <Form.Control placeholder="Department Name" type="text" name="department_name" value={this.state.department_name} onChange={this.handleInputChangeFor('department_name')}/>
             </Col>
           </Row>
         
-          <Button onClick={(event)=>this.searchPatient(event)} variant="primary" type="submit" style={{ width: '40%', margin: '0 30%' }}>
-           Search For Patient
+          <Button onClick={(event)=>this.searchProvider(event)} variant="primary" type="submit" style={{ width: '40%', margin: '0 30%' }}>
+           Search For Provider
           </Button>
         </Form>
       </Card>
     
     
-    {this.props.errors.deletePatientError && (<h2 className="alert" role="alert" > {this.props.errors.deletePatientError}</h2>)}
+    {this.props.errors.deleteProviderError && (<h2 className="alert" role="alert" > {this.props.errors.deleteProviderError}</h2>)}
     
       <Card border = "success" style={{ width: '95%', margin: '8% auto 6%' }}>
-         <h1 style={{   width: '50%', margin: '0 30% 1%' }}>Patient Search Results</h1>
+         <h1 style={{   width: '50%', margin: '0 30% 1%' }}>Provider Search Results</h1>
         <Table striped bordered hover size="sm">
             <thead>
               <tr>
                 <th>First Name</th>
                 <th>Middle Name</th>
                 <th>Last Name</th>
-                <th>D.O.B</th>
-                <th>Physical Address</th>
-                <th>Medical Aid Provider</th>
-                <th>Medical Aid #</th>
-                <th>Chart</th>
+                <th>Employee Number</th>
+                <th>Job Title</th>
+                <th>Specialty Title</th>
+                <th>Department Name</th>
                 <th>Edit</th>
                 <th>DELETE</th>
               </tr>
             </thead>
             <tbody>
-            {(this.props.patientSearch)? this.props.patientSearch.map(patient => (
-                    <tr key={patient.id}> 
-                      <td align='center'>{patient.first_name}</td>
-                      <td align='center'>{patient.middle_name}</td>
-                      <td align='center'>{patient.last_name}</td>
-                      <td align='center'>{moment(patient.date_of_birth).format('MMMM Do YYYY')}</td>
-                       <td align='center'>{patient.physical_address}</td>
-                      <td align='center'>{patient.medical_aid_provider}</td>
-                      <td align='center'>{patient.medical_aid_number}</td>
-                      <td align='center'><Button  variant="info" >View</Button></td>
+            {(this.props.providerSearch)? this.props.providerSearch.map(provider => (
+                    <tr key={provider.id}> 
+                      <td align='center'>{provider.first_name}</td>
+                      <td align='center'>{provider.middle_name}</td>
+                      <td align='center'>{provider.last_name}</td>
+                      <td align='center'>{provider.employee_num}</td>
+                       <td align='center'>{provider.job_title}</td>
+                      <td align='center'>{provider.specialty_title}</td>
+                      <td align='center'>{provider.department_name}</td>
                       <td align='center'><Button onClick={()=> {
-                        this.setState({id: patient.id})
+                        this.setState({id: provider.id})
                         this.setState({edit: true})}} variant="primary" >Edit</Button></td>
-                      <td align='center'><Button onClick={(event) =>this.deletePatient(patient)} variant="danger" >delete</Button></td>
+                      <td align='center'><Button onClick={(event) =>this.deleteProvider(provider)} variant="danger" >delete</Button></td>
                     </tr>
                   )): ''}
             </tbody>
@@ -168,7 +164,7 @@ this.setState({
       </Card>
      
 
-      {(this.state.edit)? <AddPatient patientSearch={this.props.patientSearch} patientid={this.state.id}/>:''}
+      {(this.state.edit)? <AddProvider providerSearch={this.props.providerSearch} providerid={this.state.id}/>:''}
 
   
             </div>
@@ -185,9 +181,8 @@ this.setState({
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
     errors: state.errors,
-    patientSearch: state.search.patientSearch,
+    providerSearch: state.search.providerSearch,
     user: state.user,
-
 });
 
-export default connect(mapStateToProps)(SearchPatient);
+export default connect(mapStateToProps)(SearchProvider);
