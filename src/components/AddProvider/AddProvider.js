@@ -21,7 +21,8 @@ class AddProvider extends Component {
         employee_num: '',
         job_title: '',
         specialty_title: '',
-        department_name: ''
+        department_name: '',
+        clearance_level: '',
 
       }
 
@@ -33,7 +34,7 @@ console.log( 'we are about to send the sate for a provider add', this.state);
     if ( this.state.first_name && this.state.middle_name && this.state.last_name 
       && this.state.username && this.state.password && this.state.date_of_birth
       && this.state.employee_num && this.state.job_title && this.state.specialty_title
-      && this.state.department_name) {
+      && this.state.department_name && this.state.clearance_level) {
 
 //send the new provider to the server through a redux saga
       this.props.dispatch({
@@ -49,7 +50,8 @@ console.log( 'we are about to send the sate for a provider add', this.state);
           employee_num: this.state.employee_num,
           job_title: this.state.job_title,
           specialty_title: this.state.specialty_title,
-          department_name: this.state.department_name
+          department_name: this.state.department_name,
+          clearance_level: this.state.clearance_level
         },
       });
 
@@ -65,7 +67,8 @@ console.log( 'we are about to send the sate for a provider add', this.state);
         employee_num: '',
         job_title: '',
         specialty_title: '',
-        department_name: ''
+        department_name: '',
+        clearance_level: ''
       });
     } else {
       this.props.dispatch({type: 'ADD_PROVIDER_ERROR'});
@@ -79,7 +82,7 @@ console.log( 'we are about to send the sate for a provider add', this.state);
       if ( this.state.first_name && this.state.middle_name && this.state.last_name 
       && this.state.username && this.state.password && this.state.date_of_birth
       && this.state.employee_num && this.state.job_title && this.state.specialty_title
-      && this.state.department_name){
+      && this.state.department_name && this.state.clearance_level) {
 
         //send the updated provider to the server through a redux saga
           this.props.dispatch({
@@ -96,6 +99,7 @@ console.log( 'we are about to send the sate for a provider add', this.state);
                     job_title: this.state.job_title,
                     specialty_title: this.state.specialty_title,
                     department_name: this.state.department_name,
+                    clearance_level: this.state.clearance_level,
                     id: this.props.providerid
                 }
           });
@@ -123,7 +127,8 @@ console.log( 'we are about to send the sate for a provider add', this.state);
                employee_num: '',
                job_title: '',
                specialty_title: '',
-               department_name: ''
+               department_name: '',
+               clearance_level: ''
              });
 
   }else{
@@ -163,12 +168,15 @@ console.log( 'we are about to send the sate for a provider add', this.state);
       <Form >  
           <Row>
             <Col>
+            <Form.Label>First Name</Form.Label>
               <Form.Control placeholder="First Name" type="text" name="first_name" value={this.state.first_name} onChange={this.handleInputChangeFor('first_name')}/>
             </Col>
             <Col>
+            <Form.Label>Middle Name</Form.Label>
               <Form.Control placeholder="Middle Name" type="text" name="middle_name" value={this.state.middle_name} onChange={this.handleInputChangeFor('middle_name')}/>
             </Col>
             <Col>
+            <Form.Label>Last Name</Form.Label>
               <Form.Control placeholder="Last Name" type="text" name="Last Name" value={this.state.last_name} onChange={this.handleInputChangeFor('last_name')}/>
             </Col>
           </Row>
@@ -180,28 +188,38 @@ console.log( 'we are about to send the sate for a provider add', this.state);
           </Row>
           <Row>
             <Col>
+            <Form.Label>Username</Form.Label>
               <Form.Control placeholder="Username" type="text" name="Username" value={this.state.username} onChange={this.handleInputChangeFor('username')}/>
             </Col>
             <Col>
+            <Form.Label>Password</Form.Label>
               <Form.Control placeholder="Password" type="text" name="Password" value={this.state.password} onChange={this.handleInputChangeFor('password')}/>
             </Col>
           </Row>
 
           <Row>
             <Col>
+            <Form.Label>Job Title</Form.Label>
               <Form.Control placeholder="Job Title" type="text" name="job_title" value={this.state.job_title} onChange={this.handleInputChangeFor('job_title')}/>
             </Col>
             <Col>
+            <Form.Label>Specialty Title</Form.Label>
               <Form.Control placeholder="Specialty Title" type="text" name="specialty_title" value={this.state.specialty_title} onChange={this.handleInputChangeFor('specialty_title')}/>
             </Col>
           </Row>
 
           <Row>
             <Col>
+            <Form.Label>Department Name</Form.Label>
               <Form.Control placeholder="Department Name" type="text" name="department_name" value={this.state.department_name} onChange={this.handleInputChangeFor('department_name')}/>
             </Col>
             <Col>
+            <Form.Label>Employee Number</Form.Label>
               <Form.Control placeholder="Employee Number" type="text" name="employee_num" value={this.state.employee_num} onChange={this.handleInputChangeFor('employee_num')}/>
+            </Col>
+            <Col>
+            <Form.Label>Clearance Level</Form.Label>
+              <Form.Control placeholder="Clearance Level" type="text" name="clearance_level" value={this.state.clearance_level} onChange={this.handleInputChangeFor('clearance_level')}/>
             </Col>
           </Row>
         

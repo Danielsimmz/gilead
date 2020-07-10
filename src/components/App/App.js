@@ -11,6 +11,7 @@ import AddProvider from '../AddProvider/AddProvider';
 import AddPatient from '../AddPatient/AddPatient';
 import SearchPatient from '../SearchPatient/SearchPatient';
 import SearchProvider from '../SearchProvider/SearchProvider';
+import PatientDashboard from '../PatientDashboard/PatientDashboard';
 import './App.css';
 
 
@@ -52,9 +53,14 @@ class App extends Component {
               component={AddProvider}
             />: ''}
 
+            <ProtectedRoute
+             exact path="/patientdashboard" 
+             component={PatientDashboard}/>
+
             <ProtectedRoute exact path ='/searchprovider' component={SearchProvider}/>
             <ProtectedRoute exact path ='/searchpatient' component={SearchPatient}/>
             <ProtectedRoute exact path='/addpatient' component={AddPatient}/>
+            
             {/* If none of the other routes matched, we will show a 404. */}
             
             <Route render={() => <h1>404</h1>} />

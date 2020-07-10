@@ -25,6 +25,7 @@ router.post('/updateprovider', (req, res, next) => {
   const job_title = req.body.job_title;
   const specialty_title = req.body.specialty_title;
   const department_name = req.body.department_name;
+  const clearance_level = req.body.clearance_level;
   const id = req.body.id;
 
 
@@ -37,7 +38,7 @@ router.post('/updateprovider', (req, res, next) => {
       
       //now lets update provider information in the user table (provider gets clearance of 2)
       const query2Text = `UPDATE "user" SET username=$1, password=$2, user_type=$3, clearance_level=$4, organization_id=$5, provider_id=$6 WHERE provider_id=${id}`;
-      pool.query(query2Text, [username, password, 'provider', 2, 0, id])
+      pool.query(query2Text, [username, password, 'provider', clearance_level, 0, id])
         .then((result) => {
            console.log('this is the update response in the user table', result.rows);
           res.sendStatus(201)})

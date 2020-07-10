@@ -29,6 +29,7 @@ router.post('/addprovider', (req, res, next) => {
       const job_title = req.body.job_title;
       const specialty_title = req.body.specialty_title;
       const department_name = req.body.department_name;
+      const clearance_level = req.body.clearance_level;
 
       //initialize the id you will get from the provider
       let provider_id = '';
@@ -40,9 +41,9 @@ router.post('/addprovider', (req, res, next) => {
             .then((result) => {
               console.log('this is the response', result.rows[0].id);
               provider_id = result.rows[0].id;
-              //now lets add provider information to the user table (provider gets clearance of 1)
+              //now lets add provider information to the user table (provider gets clearance of 2)
               const query2Text = 'INSERT INTO "user" (username, password, user_type, clearance_level, organization_id, provider_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
-              pool.query(query2Text, [username, password, 'provider', 2, 0, provider_id])
+              pool.query(query2Text, [username, password, 'provider', clearance_level, 0, provider_id])
                 .then(() => res.sendStatus(201))
                 .catch(() => res.sendStatus(500))
 
