@@ -12,6 +12,7 @@ import AddPatient from '../AddPatient/AddPatient';
 import SearchPatient from '../SearchPatient/SearchPatient';
 import SearchProvider from '../SearchProvider/SearchProvider';
 import PatientDashboard from '../PatientDashboard/PatientDashboard';
+import IcuChart from '../PatientCharts/Icu';
 import './App.css';
 
 
@@ -60,6 +61,7 @@ class App extends Component {
             <ProtectedRoute exact path ='/searchprovider' component={SearchProvider}/>
             <ProtectedRoute exact path ='/searchpatient' component={SearchPatient}/>
             <ProtectedRoute exact path='/addpatient' component={AddPatient}/>
+            <ProtectedRoute exact path='/icuchart' component={IcuChart}/>
             
             {/* If none of the other routes matched, we will show a 404. */}
             

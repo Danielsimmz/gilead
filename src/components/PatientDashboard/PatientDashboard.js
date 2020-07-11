@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 
 
+
 class PatientDashboard extends Component {
 
     render () {
@@ -15,6 +16,8 @@ class PatientDashboard extends Component {
               </div>
 
                 <h1>Patient Dashboard</h1>
+
+                <Link to='/icuchart'>ICU</Link>
             </div>
         );
     }
