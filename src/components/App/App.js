@@ -12,7 +12,7 @@ import AddPatient from '../AddPatient/AddPatient';
 import SearchPatient from '../SearchPatient/SearchPatient';
 import SearchProvider from '../SearchProvider/SearchProvider';
 import PatientDashboard from '../PatientDashboard/PatientDashboard';
-import IcuChart from '../PatientCharts/Icu';
+import IcuChart from '../PatientCharts/ICU/ICUForm';
 import './App.css';
 
 
