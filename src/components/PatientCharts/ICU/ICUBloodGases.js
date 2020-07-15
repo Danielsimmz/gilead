@@ -10,8 +10,8 @@ import Button from "react-bootstrap/Button";
 class ICUBloodGases extends Component {
 
     state = {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -45,7 +45,7 @@ class ICUBloodGases extends Component {
           });
 
           this.setState({
-              patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '',
+              patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '',
               ph: '', pco2: '', po2: '', hco3: '', peep: '', tv: '', be: '', rr: '',
               fio2: '',
           })
@@ -65,6 +65,7 @@ class ICUBloodGases extends Component {
         return(
             <div>
                 <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Blood Gases</h2>
+                {this.props.errors.addBloodGasesError && (<h2 className="alert" role="alert"> {this.props.errors.addBloodGasesError}</h2>)}
 
           <Row>
                 <Col>
@@ -129,5 +130,9 @@ class ICUBloodGases extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
 
-export default connect() (ICUBloodGases);
+export default connect(mapStateToProps) (ICUBloodGases);

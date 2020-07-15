@@ -10,8 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 class ICUMisc extends Component {
 
     state= {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -53,7 +53,7 @@ class ICUMisc extends Component {
           });
 
           this.setState({
-                 patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '',
+                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '',
                  pressure_points: '', iv_checks: '', hemocheck: '', loc_m: '', loc_e: '',
                  loc_v: '', loc_total: '', cannula_site: '', _2hr_turns: '', pressure_support: '',
                  pain_score: '', sedation_score: '', neuro_obs: '', iv_or_cvp_site: '', feet: '',
@@ -74,6 +74,7 @@ class ICUMisc extends Component {
         return(
             <div>
                  <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Miscellaneous</h2>
+                 {this.props.errors.addIcuMiscError && (<h2 className="alert" role="alert"> {this.props.errors.addIcuMiscError}</h2>)}
 
           <Row>
                 <Col>
@@ -237,4 +238,10 @@ class ICUMisc extends Component {
 }
 
 
-export default connect()(ICUMisc);
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+
+export default connect(mapStateToProps)(ICUMisc);

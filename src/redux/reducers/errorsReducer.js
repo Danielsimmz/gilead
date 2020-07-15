@@ -173,11 +173,130 @@ const deleteProviderError = (state = '', action) => {
 }
 
 
+const addBasicVitalsError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_BASIC_VITALS_ERROR':
+      return '';
+    case 'ADD_BASIC_VITALS_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+const addBloodGasesError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_BLOOD_GASES_ERROR':
+      return '';
+    case 'ADD_BLOOD_GASES_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+const addCardiacRespError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_CARDIAC_RESP_ERROR':
+      return '';
+    case 'ADD_CARDIAC_RESP_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+
+const addFluidBalanceError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_FLUID_BALANCE_ERROR':
+      return '';
+    case 'ADD_FLUID_BALANCE_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+
+const addGeneralInfoError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_GENERAL_INFO_ERROR':
+      return '';
+    case 'ADD_GENERAL_INFO_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+const addMedListError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_MED_LIST_ERROR':
+      return '';
+    case 'ADD_MED_LIST_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+
+const addIcuMiscError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_ICU_MISC_ERROR':
+      return '';
+    case 'ADD_ICU_MISC_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+const addSpecialInvError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_SPEC_INV_ERROR':
+      return '';
+    case 'ADD_SPEC_INV_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
+
+
+
+const addLabEnteringError = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_ADD_LAB_ENTERING_ERROR':
+      return '';
+    case 'ADD_LAB_ENTERING_ERROR':
+      return 'Oops, error sending your inputs, try again!';
+    default:
+      return state;
+  }
+}
 
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
+  addBasicVitalsError,
+  addLabEnteringError,
+  addIcuMiscError,
+  addSpecialInvError,
+  addMedListError,
+  addGeneralInfoError,
+  addBloodGasesError,
+  addCardiacRespError,
+  addFluidBalanceError,
   loginMessage,
   registrationMessage,
   addProviderError,

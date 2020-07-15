@@ -10,8 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 class ICUSpecialInvestigations extends Component {
 
     state = {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -53,7 +53,7 @@ class ICUSpecialInvestigations extends Component {
           });
 
           this.setState({
-                 patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '',
+                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '',
                  urinalysis_protein: '', urinalysis_acetone: '', urinalysis_blood: '', urinalysis_bile: '',
                  urinalysis_sg: '', urinalysis_ph: '', urine_collection_date: '', urine_collection_time: '', urine_result_date: '',
                 urine_result_time: '', sputum_collection_date: '', sputum_collection_time: '', sputum_result_date: '',
@@ -78,6 +78,7 @@ class ICUSpecialInvestigations extends Component {
 
                 
         <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Special Investigations</h2>
+        {this.props.errors.addSpecialInvError && (<h2 className="alert" role="alert"> {this.props.errors.addSpecialInvError}</h2>)}
 
           <Row>
                 <Col>
@@ -171,5 +172,10 @@ class ICUSpecialInvestigations extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
 
-export default connect() (ICUSpecialInvestigations);
+
+export default connect(mapStateToProps) (ICUSpecialInvestigations);

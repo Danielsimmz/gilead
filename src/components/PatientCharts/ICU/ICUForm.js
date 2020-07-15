@@ -32,15 +32,15 @@ class ICUForm extends Component {
     <Card border = "success" style={{ width: '85%', margin: '3% auto' }} >
  
         <Form> 
-              <ICUBasicVitals/>
-              <ICUCardiacResp/>
-              <ICUMisc/>
-              <ICUMedList/>
-              <ICUBloodGases/>
-              <LabEntering/>
-              <ICUFluidBalance/>
-              <ICUGeneralInfo/>
-              <ICUSpecialInvestigations/>
+              <ICUBasicVitals patient={this.props.patient}/>
+              <ICUCardiacResp  patient={this.props.patient}/>
+              <ICUMisc patient={this.props.patient}/>
+              <ICUMedList  patient={this.props.patient}/>
+              <ICUBloodGases  patient={this.props.patient}/>
+              <LabEntering  patient={this.props.patient}/>
+              <ICUFluidBalance  patient={this.props.patient}/>
+              <ICUGeneralInfo  patient={this.props.patient}/>
+              <ICUSpecialInvestigations  patient={this.props.patient}/>
                        
         </Form>
       </Card>
@@ -51,5 +51,10 @@ class ICUForm extends Component {
     }
 }
 
+const mapStateToProps = state => ({
 
-export default connect()(ICUForm);
+    user: state.user,
+    patient: state.dashPatient.dashboardUser,
+});
+
+export default connect(mapStateToProps)(ICUForm);

@@ -15,7 +15,7 @@ class PatientDashboard extends Component {
                 <Link to='/searchpatient'> <Button variant="outline-secondary">Search For A Patient</Button></Link>
               </div>
 
-                <h1>Patient Dashboard</h1>
+                <h1>Patient Dashboard for {this.props.patient.first_name}</h1>
 
                 <Link to='/icuchart'>ICU</Link>
             </div>
@@ -23,5 +23,10 @@ class PatientDashboard extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+   
+    user: state.user,
+    patient: state.dashPatient.dashboardUser,
+});
 
-export default connect() (PatientDashboard);
+export default connect(mapStateToProps) (PatientDashboard);

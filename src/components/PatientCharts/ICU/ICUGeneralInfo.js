@@ -10,8 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 class ICUGeneralInfo extends Component {
 
     state = {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -76,7 +76,7 @@ class ICUGeneralInfo extends Component {
           });
 
           this.setState({
-                 patient_id: '', date_of_birth: '', admission_id: '',
+                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '',
                  date: '', time: '', duty_nurse_first_name: '', duty_nurse_middle_name: '', duty_nurse_last_name: '', 
                  duty_intensivist_first_name: '', duty_intensivist_middle_name: '', duty_intensivist_last_name: '', physiotherapist_first_name: '',
                  physiotherapist_middle_name: '', physiotherapist_last_name: '', days_in_icu: '', doc_procedures_observations: '', doc_signature_procedures_observations: '',
@@ -104,6 +104,7 @@ class ICUGeneralInfo extends Component {
         return(
             <div>
                  <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>General Info</h2>
+                 {this.props.errors.addGeneralInfoError && (<h2 className="alert" role="alert"> {this.props.errors.addGeneralInfoError}</h2>)}
 
           <Row>
                 <Col>
@@ -304,4 +305,11 @@ class ICUGeneralInfo extends Component {
 
 }
 
-export default connect() (ICUGeneralInfo);
+
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+
+export default connect(mapStateToProps) (ICUGeneralInfo);

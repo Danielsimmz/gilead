@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/patient.router');
 const providerRouter = require('./routes/provider.router');
+const icuRouter = require('./routes/icu.router');
 
 
 // Body parser middleware
@@ -31,6 +32,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/patient', patientRouter);
 app.use('/api/provider', providerRouter);
+app.use('/api/icu', icuRouter);
 
 
 // Serve static files

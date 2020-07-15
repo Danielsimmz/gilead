@@ -10,8 +10,8 @@ import Button from "react-bootstrap/Button";
 class LabEntering extends Component {
 
     state = {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         ordering_first_name: '',
         ordering_middle_name: '',
@@ -79,7 +79,7 @@ class LabEntering extends Component {
           });
 
           this.setState({
-                 patient_id: '', date_of_birth: '', admission_id: '', ordering_first_name: '', ordering_middle_name: '',
+                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', ordering_first_name: '', ordering_middle_name: '',
                  ordering_last_name: '', resulting_first_name: '', resulting_middle_name: '', resulting_last_name: '',
                 date_ordered: '', time_ordered: '', date_resulted: '', time_resulted: '', pcv: '', hb: '',
                 wcc: '', rbc: '', platelets: '', pi: '', clotting_time: '', sgot: '', spgt: '',  ldh: '',
@@ -102,6 +102,7 @@ class LabEntering extends Component {
             return (
                 <div>
                     <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Lab Results</h2>
+                    {this.props.errors.addLabEnteringError && (<h2 className="alert" role="alert"> {this.props.errors.addLabEnteringError}</h2>)}
 
           <Row>
                 <Col>
@@ -293,4 +294,10 @@ class LabEntering extends Component {
 }
 
 
-export default connect()(LabEntering);
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+
+export default connect(mapStateToProps)(LabEntering);

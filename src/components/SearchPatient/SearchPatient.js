@@ -156,7 +156,9 @@ this.setState({
                        <td align='center'>{patient.physical_address}</td>
                       <td align='center'>{patient.medical_aid_provider}</td>
                       <td align='center'>{patient.medical_aid_number}</td>
-                      <td align='center'><Link to="/patientdashboard"><Button  variant="info" >View</Button></Link></td>
+                      <td align='center'><Link to="/patientdashboard"><Button  onClick={()=> {
+                            this.props.dispatch({type: 'SET_DASH', payload: patient})
+                          }} variant="info">View</Button></Link></td>
                       <td align='center'><Button onClick={()=> {
                         this.setState({id: patient.id})
                         this.setState({edit: true})}} variant="primary" >Edit</Button></td>

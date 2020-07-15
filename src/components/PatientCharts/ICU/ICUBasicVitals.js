@@ -12,8 +12,8 @@ class ICUBasicVitals extends Component {
 
     state = {
 
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -50,7 +50,7 @@ class ICUBasicVitals extends Component {
           });
 
           this.setState({
-              patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '', blood_pressure_systolic: '',
+              patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '', blood_pressure_systolic: '',
               blood_pressure_diastolic: '', noninvasive_bp: '', temperature: '', temp_location: '', pulse_or_heart_rate: '',
               respiration_rate: '', spo2: ' ', patient_weight: '', patient_height: '', blood_sugar: ''  
           })
@@ -65,11 +65,14 @@ class ICUBasicVitals extends Component {
         });
     }
 
+      
+
     render() {
         return(
             <div>
                 
                      <h2 className="formsheader" style={{   width: '50%', margin: '0 40% 1%', }}>Basic Vitals</h2> 
+                      {this.props.errors.addBasicVitalsError && (<h2 className="alert" role="alert"> {this.props.errors.addBasicVitalsError}</h2>)}
             <Row>
                 <Col>
                 <Form.Label>Date</Form.Label>
@@ -152,4 +155,11 @@ class ICUBasicVitals extends Component {
 }
 
 
-export default connect() (ICUBasicVitals);
+//Bring in state to access the error reducers
+const mapStateToProps = state => ({
+  user: state.user,
+  errors: state.errors,
+});
+
+
+export default connect(mapStateToProps) (ICUBasicVitals);

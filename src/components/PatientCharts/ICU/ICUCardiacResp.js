@@ -8,8 +8,8 @@ import Button from "react-bootstrap/Button";
 class ICUCardiacResp extends Component {
 
     state= {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -39,6 +39,8 @@ class ICUCardiacResp extends Component {
         humidifier_ho_level: '',
         emptying_vent_tubes: '',
         ett_measure: '',
+        feet: '',
+        pressure_support: '',
 
     }
 
@@ -60,18 +62,18 @@ class ICUCardiacResp extends Component {
                   set_tidal_volume: this.state.set_tidal_volume, peak_airway_pressure: this.state.peak_airway_pressure, rt_pedal_pulse: this.state.rt_pedal_pulse,
                   lt_pedal_pulse: this.state.lt_pedal_pulse, lt_pedal_pulse_score: this.state.lt_pedal_pulse_score, rt_pedal_pulse_score: this.state.rt_pedal_pulse_score,
                   cpap_peep: this.cpap_peep, gas_temperature: this.state.gas_temperature, humidifier_ho_level: this.state.humidifier_ho_level, emptying_vent_tubes: this.state.emptying_vent_tubes,
-                  ett_measure: this.state.ett_measure,
+                  ett_measure: this.state.ett_measure, feet: this.state.feet, pressure_support: this.state.pressure_support
               }
 
           });
 
           this.setState({
-             patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '', cardiac_rhythm: '',
+             patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '', cardiac_rhythm: '',
              cvp: '', minute_volume: '', patient_tidal_volume: '', suction: '', intake_oxygen_rate: '', color: '',
              map: '', pap: '', pawp: '', lt_auscultation: '', rt_auscultation: '', perfusion: '', ventilation_mode: '',
              ventilation_rate: '', set_tidal_volume: '', peak_airway_pressure: '', rt_pedal_pulse: '',
              lt_pedal_pulse: '', lt_pedal_pulse_score: '', rt_pedal_pulse_score: '', cpap_peep: '', gas_temperature: '',
-             humidifier_ho_level: '', emptying_vent_tubes: '', ett_measure: '',
+             humidifier_ho_level: '', emptying_vent_tubes: '', ett_measure: '', feet: '', pressure_support: '',
           })
     }
 
@@ -88,6 +90,7 @@ class ICUCardiacResp extends Component {
 
                 <div>
                        <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Cardiac & Respiratory</h2>
+                       {this.props.errors.addCardiacRespError && (<h2 className="alert" role="alert"> {this.props.errors.addCardiacRespError}</h2>)}
               <Row>
                 <Col>
                 <Form.Label>Date</Form.Label>
@@ -302,4 +305,11 @@ class ICUCardiacResp extends Component {
     }
 }
 
-export default connect()(ICUCardiacResp);
+
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+
+export default connect(mapStateToProps)(ICUCardiacResp);

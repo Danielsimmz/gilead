@@ -10,8 +10,8 @@ import Button from "react-bootstrap/Button";
 class ICUFluidBalance extends Component {
 
     state = {
-        patient_id: '',
-        date_of_birth: '',
+        patient_id: this.props.patient.id,
+        date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
         date: '',
         time: '',
@@ -58,7 +58,7 @@ class ICUFluidBalance extends Component {
           });
 
           this.setState({
-             patient_id: '', date_of_birth: '', admission_id: '', date: '', time: '', intravenous_fluid_intake_type: '',
+             patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '', intravenous_fluid_intake_type: '',
             intravenous_fluid_intake_amount: '', oral_intake_type: '', oral_intake_amount: '', oral_intake_hourly_total: '', 
             gastric_feed_intake_type: '', gastric_feed_intake_amount: '', nasogastric_suction_and_vomitus_output: '', portovac_under_h2o_drain_output: '',
             stool_drainage_output: '', urine_ouput: '', hourly_urine_output: '', nig_aspirate_output: '',
@@ -80,6 +80,7 @@ class ICUFluidBalance extends Component {
             return (
                 <div>
                     <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Fluid Balance</h2>
+                    {this.props.errors.addFluidBalanceError && (<h2 className="alert" role="alert"> {this.props.errors.addFluidBalanceError}</h2>)}
 
           <Row>
                 <Col>
@@ -172,7 +173,7 @@ class ICUFluidBalance extends Component {
                 </Col>
                  <Col>
                 <Form.Label> Output Test</Form.Label>
-                <Form.Control placeholder="Output Test" type="number" name="output_test" value={this.state.output_test} onChange={this.handleInputChangeFor('output_test')}/>
+                <Form.Control placeholder="Output Test" type="text" name="output_test" value={this.state.output_test} onChange={this.handleInputChangeFor('output_test')}/>
                 </Col>
                  <Col>
                 <Form.Label> Running Output Total</Form.Label>
@@ -194,4 +195,11 @@ class ICUFluidBalance extends Component {
 
 }
 
-export default connect() (ICUFluidBalance);
+
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+
+export default connect(mapStateToProps) (ICUFluidBalance);
