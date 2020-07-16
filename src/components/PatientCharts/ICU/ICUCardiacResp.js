@@ -58,10 +58,10 @@ class ICUCardiacResp extends Component {
                   minute_volume: this.state.minute_volume, patient_tidal_volume: this.state.patient_tidal_volume, suction: this.state.suction,
                   intake_oxygen_rate: this.state.intake_oxygen_rate, color: this.state.color, map: this.state.map, pap: this.state.pap,
                   pawp: this.state.pawp, lt_auscultation: this.state.lt_auscultation, rt_auscultation: this.state.rt_auscultation,
-                  perfusion: this.state.perfusion, ventilation_mode: this.ventilation_mode, ventilation_rate: this.state.ventilation_rate,
+                  perfusion: this.state.perfusion, ventilation_mode: this.state.ventilation_mode, ventilation_rate: this.state.ventilation_rate,
                   set_tidal_volume: this.state.set_tidal_volume, peak_airway_pressure: this.state.peak_airway_pressure, rt_pedal_pulse: this.state.rt_pedal_pulse,
                   lt_pedal_pulse: this.state.lt_pedal_pulse, lt_pedal_pulse_score: this.state.lt_pedal_pulse_score, rt_pedal_pulse_score: this.state.rt_pedal_pulse_score,
-                  cpap_peep: this.cpap_peep, gas_temperature: this.state.gas_temperature, humidifier_ho_level: this.state.humidifier_ho_level, emptying_vent_tubes: this.state.emptying_vent_tubes,
+                  cpap_peep: this.state.cpap_peep, gas_temperature: this.state.gas_temperature, humidifier_ho_level: this.state.humidifier_ho_level, emptying_vent_tubes: this.state.emptying_vent_tubes,
                   ett_measure: this.state.ett_measure, feet: this.state.feet, pressure_support: this.state.pressure_support
               }
 

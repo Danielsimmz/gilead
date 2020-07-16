@@ -79,6 +79,19 @@ class ICUSpecialInvestigations extends Component {
                 
         <h2 style={{   width: '70%', margin: '2% 40% 2%', }}>Special Investigations</h2>
         {this.props.errors.addSpecialInvError && (<h2 className="alert" role="alert"> {this.props.errors.addSpecialInvError}</h2>)}
+           
+            <Row>
+                <Col>
+                <Form.Label>Date</Form.Label>
+                <Form.Control placeholder="Date Of Entry" type="date" name="date" value={this.state.date} onChange={this.handleInputChangeFor('date')}/>
+                </Col>
+
+                <Col>
+                <Form.Label>Time</Form.Label>
+                <Form.Control placeholder="Time Of Entry" type="time" name="time" value={this.state.time} onChange={this.handleInputChangeFor('time')}/>
+                </Col>
+    
+            </Row>
 
           <Row>
                 <Col>
@@ -90,6 +103,9 @@ class ICUSpecialInvestigations extends Component {
                 <Form.Label>Time Urine Collected</Form.Label>
                 <Form.Control placeholder="Time Collected" type="time" name="urine_collection_time" value={this.state.urine_collection_time} onChange={this.handleInputChangeFor('urine_collection_time')}/>
                 </Col>
+            </Row>
+
+            <Row>
                 <Col>
                 <Form.Label>Date Urine Resulted</Form.Label>
                 <Form.Control placeholder="Date Resulted" type="date" name="urine_result_date" value={this.state.urine_result_date} onChange={this.handleInputChangeFor('urine_result_date')}/>
@@ -99,7 +115,6 @@ class ICUSpecialInvestigations extends Component {
                 <Form.Label>Time Urine Resulted</Form.Label>
                 <Form.Control placeholder="Time Resulted" type="time" name="urine_result_time" value={this.state.urine_result_time} onChange={this.handleInputChangeFor('urine_result_time')}/>
                 </Col>
-    
             </Row>
 
             <Row>
@@ -141,6 +156,10 @@ class ICUSpecialInvestigations extends Component {
                 <Form.Label>Time Sputum Collected</Form.Label>
                 <Form.Control placeholder="Time Collected" type="time" name="sputum_collection_time" value={this.state.sputum_collection_time} onChange={this.handleInputChangeFor('sputum_collection_time')}/>
                 </Col>
+                
+            </Row>
+
+            <Row>
                 <Col>
                 <Form.Label>Date Sputum Resulted</Form.Label>
                 <Form.Control placeholder="Date Resulted" type="date" name="sputum_result_date" value={this.state.sputum_result_date} onChange={this.handleInputChangeFor('sputum_result_date')}/>

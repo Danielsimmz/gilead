@@ -13,12 +13,8 @@ class LabEntering extends Component {
         patient_id: this.props.patient.id,
         date_of_birth: this.props.patient.date_of_birth,
         admission_id: '',
-        ordering_first_name: '',
-        ordering_middle_name: '',
-        ordering_last_name: '',
-        resulting_first_name: '',
-        resulting_middle_name: '',
-        resulting_last_name: '',
+        ordering_provider_id: '',
+        resulting_provider_id: '',
         date_ordered: '',
         time_ordered: '',
         date_resulted: '',
@@ -54,6 +50,11 @@ class LabEntering extends Component {
     }
 
 
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'GET_PROVIDERS'
+        })
+    }
 
 
 
@@ -65,23 +66,22 @@ class LabEntering extends Component {
           this.props.dispatch({
               type: 'LAB_ENTERING',
               payload: {
-                    patient_id: this.state.patient_id, date_of_birth: this.state.date_of_birth, admission_id: this.state.admission_id, ordering_first_name: this.state.ordering_first_name,
-                    ordering_middle_name: this.state.ordering_middle_name, ordering_last_name: this.state.ordering_last_name, resulting_first_name: this.state.resulting_first_name, resulting_middle_name: this.state.resulting_middle_name,
-                    resulting_last_name: this.state.resulting_last_name, date_ordered: this.state.date_ordered, time_ordered: this.state.time_ordered, date_resulted: this.state.date_resulted,
+                    patient_id: this.state.patient_id, date_of_birth: this.state.date_of_birth, admission_id: this.state.admission_id,
+                    date_ordered: this.state.date_ordered, time_ordered: this.state.time_ordered, date_resulted: this.state.date_resulted,
                     time_resulted: this.state.time_resulted, pcv: this.state.pcv, hb: this.state.hb, wcc: this.state.wcc, rbc: this.state.rbc,
                     platelets: this.state.platelets, pi: this.state.pi, clotting_time: this.state.clotting_time, sgot: this.state.sgot, spgt: this.state.spgt,
                     ldh: this.state.ldh, cpk: this.state.cpk, urea: this.state.urea, na: this.state.na, k: this.state.k,
                     cl: this.state.cl, creat: this.state.creat, protein_total: this.state.protein_total, albumin: this.state.albumin,
                     globulin: this.state.globulin, eet_osmol: this.state.eet_osmol, urine_osmol: this.state.urine_osmol, ca: this.state.ca,
-                    mg: this.state.mg, po4: this.state.po4, abgs: this.state.abgs, abe: this.state.abe, osat: this.state.osat,
+                    mg: this.state.mg, po4: this.state.po4, abgs: this.state.abgs, abe: this.state.abe, osat: this.state.osat, ordering_provider_id: this.state.ordering_provider_id,
+                    resulting_provider_id: this.state.resulting_provider_id,
                 }
 
           });
 
           this.setState({
-                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', ordering_first_name: '', ordering_middle_name: '',
-                 ordering_last_name: '', resulting_first_name: '', resulting_middle_name: '', resulting_last_name: '',
-                date_ordered: '', time_ordered: '', date_resulted: '', time_resulted: '', pcv: '', hb: '',
+                 patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', 
+                ordering_provider_id: '', resulting_provider_id: '', date_ordered: '', time_ordered: '', date_resulted: '', time_resulted: '', pcv: '', hb: '',
                 wcc: '', rbc: '', platelets: '', pi: '', clotting_time: '', sgot: '', spgt: '',  ldh: '',
                 cpk: '', urea: '', na: '', k: '', cl: '', creat: '', protein_total: '', albumin: '',
                 globulin: '', eet_osmol: '',  urine_osmol: '', ca: '', mg: '', po4: '', abgs: '', abe: '', osat: '',
@@ -125,44 +125,32 @@ class LabEntering extends Component {
                 </Col>
     
             </Row>
+            
+           
             <Row>
                 <Col>
-                <Form.Label>Ordering Provider </Form.Label>
-                </Col>
+                <Form.Label>Ordering Provider</Form.Label>
+                <Form.Control as="select" onChange={(event)=>this.setState({ordering_provider_id: event.target.value})}>
+                    <option value="">Pick From Below </option>
+                    {(this.props.providerList)? this.props.providerList.map(provider => (
+
+                    <option key={provider.id} value= {provider.id}> {provider.job_title +  '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                        )): ''}
+                 </Form.Control>
+                 </Col>
+                  <Col>
+                <Form.Label>Resulting Provider</Form.Label>
+                <Form.Control as="select" onChange={(event)=>this.setState({resulting_provider_id: event.target.value})}>
+                    <option value="">Pick From Below </option>
+                      {(this.props.providerList)? this.props.providerList.map(provider => (
+
+                    <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                        )): ''}
+                 </Form.Control>
+                 </Col>
             </Row>
-            <Row>
-                <Col>
-                 <Form.Label>First Name</Form.Label>
-                <Form.Control placeholder="First Name" type="text" name="ordering_first_name" value={this.state.ordering_first_name} onChange={this.handleInputChangeFor('ordering_first_name')}/>
-                </Col>
-                <Col>
-                 <Form.Label>Middle Name</Form.Label>
-                <Form.Control placeholder="Middle Name" type="text" name="ordering_middle_name" value={this.state.ordering_middle_name} onChange={this.handleInputChangeFor('ordering_middle_name')}/>
-                </Col>
-                <Col>
-                 <Form.Label>Last Name</Form.Label>
-                <Form.Control placeholder="Last Name" type="text" name="ordering_last_name" value={this.state.ordering_last_name} onChange={this.handleInputChangeFor('ordering_last_name')}/>
-                </Col>
-            </Row>
-             <Row>
-                <Col>
-                <Form.Label>Resulting Provider </Form.Label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                 <Form.Label>First Name</Form.Label>
-                <Form.Control placeholder="First Name" type="text" name="resulting_first_name" value={this.state.resulting_first_name} onChange={this.handleInputChangeFor('resulting_first_name')}/>
-                </Col>
-                <Col>
-                 <Form.Label>Middle Name</Form.Label>
-                <Form.Control placeholder="Middle Name" type="text" name="resulting_middle_name" value={this.state.resulting_middle_name} onChange={this.handleInputChangeFor('resulting_middle_name')}/>
-                </Col>
-                <Col>
-                 <Form.Label>Last Name</Form.Label>
-                <Form.Control placeholder="Last Name" type="text" name="resulting_last_name" value={this.state.resulting_last_name} onChange={this.handleInputChangeFor('resulting_last_name')}/>
-                </Col>
-            </Row>
+           
+           
             <Row>
                 <Col>
                  <Form.Label>PCV (%)</Form.Label>
@@ -297,6 +285,7 @@ class LabEntering extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     errors: state.errors,
+    providerList: state.provider.providerList,
 });
 
 

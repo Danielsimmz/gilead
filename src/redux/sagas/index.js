@@ -6,6 +6,7 @@ import ProviderSaga from './ProviderSaga';
 import PatientSaga from './PatientSaga';
 import providerLoginSaga from './providerLoginSaga';
 import searchSaga from './searchSaga';
+import icuSaga from './ICUSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     PatientSaga(),
     providerLoginSaga(),
     searchSaga(),
+    icuSaga(),
   ]);
 }

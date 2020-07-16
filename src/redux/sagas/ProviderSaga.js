@@ -66,7 +66,22 @@ function* deleteProvider(action) {
     }
 }
 
+function* getProviders(action) {
+        try {
+            console.log('we are about to get providers', action.type);
 
+            const response = yield axios.get(`/api/provider/list`);
+
+            yield put({
+                type: 'SET_PROVIDER_LIST',
+                payload: response.data
+            });
+
+            console.log('Here is the list of providers', response.data);
+        } catch (error) {
+            console.log('Error with getting the list of providers:', error);
+        }
+}
 
 
 
@@ -74,6 +89,7 @@ function* ProviderSaga() {
     yield takeLatest('REGISTER_PROVIDER', registerProvider);
      yield takeLatest('UPDATE_PROVIDER', updateProvider);
      yield takeLatest('DELETE_PROVIDER', deleteProvider);
+     yield takeLatest('GET_PROVIDERS', getProviders);
      
 }
 

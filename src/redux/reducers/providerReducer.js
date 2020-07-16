@@ -1,3 +1,6 @@
+
+import { combineReducers } from 'redux';
+
 const providerReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_PROVIDER':
@@ -9,6 +12,20 @@ const providerReducer = (state = {}, action) => {
     }
 };
 
+
+const providerList = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PROVIDER_LIST':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+
 // user will be on the redux state at:
 // state.provider
-export default providerReducer;
+export default combineReducers({
+    providerReducer,
+    providerList,
+});

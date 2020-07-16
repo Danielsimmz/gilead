@@ -57,6 +57,25 @@ router.post('/updateprovider', (req, res, next) => {
     // department_name: blah
 
 
+router.get('/list', (req, res) => {
+  console.log('We are about to get the provider list');
+
+  const queryText = `SELECT * FROM medical_providers;`;
+    pool.query(queryText)
+      .then((result) => {
+      console.log('Here is the provider list', result.rows);
+      res.send(result.rows);
+  }).catch((error) => {
+    console.log(`Error on provide search query ${error}`);
+    res.sendStatus(500);
+  });
+
+});
+
+
+
+
+
 router.get('/searchprovider', (req, res) =>{
     console.log('we are in the provider search get, here are the search terms', req.query.first_name);
 
