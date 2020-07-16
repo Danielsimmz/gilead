@@ -123,7 +123,7 @@ router.post('/addcardiacresp', (req, res, next) => {
                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33) RETURNING id `;
     pool.query(queryText, [patient_id, date_of_birth, admission_id, date, time, cardiac_rhythm, cvp, minute_volume, patient_tidal_volume, suction, intake_oxygen_rate, color, map, pap, pawp, lt_auscultation, rt_auscultation, perfusion, ventilation_mode, ventilation_rate, set_tidal_volume, peak_airway_pressure, rt_pedal_pulse, lt_pedal_pulse, lt_pedal_pulse_score, rt_pedal_pulse_score, cpap_peep, gas_temperature, humidifier_ho_level, emptying_vent_tubes, ett_measure, feet, pressure_support])
         .then((result) => {
-            console.log('this is the response for basic vitals insertion', result.rows[0].id);
+            console.log('this is the response for cardiac resp insertion', result.rows[0].id);
             res.sendStatus(201)
         }).catch(() => res.sendStatus(500));
 });
@@ -136,11 +136,11 @@ router.post('/addfluidbalance', (req, res, next) => {
     console.log('these are the incoming fluid balance inputs', req.body);
 
     //pull out the incoming object data
-    const patient_id = Number(req.body.patient_id);
-    const date_of_birth = req.body.date_of_birth;
-    const admission_id = Number(req.body.admission_id) || 0;
-    const date = req.body.date;
-    const time = req.body.time;
+     const patient_id = Number(req.body.patient_id);
+     const date_of_birth = req.body.date_of_birth;
+     const admission_id = Number(req.body.admission_id) || 1;
+     const date = req.body.date;
+     const time = req.body.time;
     const intravenous_fluid_intake_type = req.body.intravenous_fluid_intake_type;
     const intravenous_fluid_intake_amount = Number(req.body.intravenous_fluid_intake_amount);
     const oral_intake_type = req.body.oral_intake_type;
@@ -152,7 +152,7 @@ router.post('/addfluidbalance', (req, res, next) => {
     const portovac_under_h2o_drain_output = Number(req.body.portovac_under_h2o_drain_output);
     const stool_drainage_output = Number(req.body.stool_drainage_output);
     const urine_ouput = Number(req.body.urine_ouput);
-    const hourly_urine_output = Number(req.body.hourly_urine_output);
+    const urine_hourly_total_output = Number(req.body.pee_hours_output);
     const nig_aspirate_output = Number(req.body.nig_aspirate_output);
     const sg_output = Number(req.body.sg_output);
     const output_test = req.body.output_test;
@@ -160,18 +160,20 @@ router.post('/addfluidbalance', (req, res, next) => {
     const hourly_balance = Number(req.body.hourly_balance);
 
 
+ 
+
     //this is the query for the information to be put into the database
     const queryText = `INSERT INTO "icu_fluid_balance" 
-                (patient_id, date_of_birth, admission_id, date, time, intravenous_fluid_intake_type, intravenous_fluid_intake_amount, oral_intake_type, oral_intake_amount, oral_intake_hourly_total, gastric_feed_intake_type, gastric_feed_intake_amount, nasogastric_suction_and_vomitus_output, portovac_under_h2o_drain_output, stool_drainage_output, urine_ouput, hourly_urine_output, nig_aspirate_output, sg_output, output_test, running_output_total, hourly_balance)
+                (patient_id, date_of_birth, admission_id, date, time, intravenous_fluid_intake_type, intravenous_fluid_intake_amount, oral_intake_type, oral_intake_amount, oral_intake_hourly_total, gastric_feed_intake_type, gastric_feed_intake_amount, nasogastric_suction_and_vomitus_output, portovac_under_h2o_drain_output, stool_drainage_output, urine_ouput, urine_hourly_total_output, nig_aspirate_output, sg_output, output_test, running_output_total, hourly_balance)
                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id `;
-    pool.query(queryText, [patient_id, date_of_birth, admission_id, date, time, intravenous_fluid_intake_type, intravenous_fluid_intake_amount, oral_intake_type, oral_intake_amount, oral_intake_hourly_total, gastric_feed_intake_type, gastric_feed_intake_amount, nasogastric_suction_and_vomitus_output, portovac_under_h2o_drain_output, stool_drainage_output, urine_ouput, hourly_urine_output, nig_aspirate_output, sg_output, output_test, running_output_total, hourly_balance])
+    pool.query(queryText, [patient_id, date_of_birth, admission_id, date, time, intravenous_fluid_intake_type, intravenous_fluid_intake_amount, oral_intake_type, oral_intake_amount, oral_intake_hourly_total, gastric_feed_intake_type, gastric_feed_intake_amount, nasogastric_suction_and_vomitus_output, portovac_under_h2o_drain_output, stool_drainage_output, urine_ouput, urine_hourly_total_output, nig_aspirate_output, sg_output, output_test, running_output_total, hourly_balance])
         .then((result) => {
             console.log('this is the response for fluid balance insertion', result.rows[0].id);
             res.sendStatus(201)
         }).catch(() => res.sendStatus(500));
 });
 
-
+  
 
  
 
@@ -185,7 +187,7 @@ router.post('/addgeneralinfo', (req, res, next) => {
 
         const patient_id = Number(req.body.patient_id);
         const date_of_birth = req.body.date_of_birth;
-        const admission_id = Number(req.body.admission_id) || 0;
+        const admission_id = Number(req.body.admission_id) || 1;
         const date = req.body.date;
         const time = req.body.time;
         const duty_nurse_provider_id = Number(req.body.duty_nurse_provider_id);
@@ -214,7 +216,7 @@ router.post('/addgeneralinfo', (req, res, next) => {
     //this is the query for the information to be put into the database
     const queryText = `INSERT INTO "icu_general_chart" 
                 (patient_id, date_of_birth, admission_id, date, time, duty_nurse_provider_id, duty_intensivist_provider_id, physiotherapist_id, provider_id_procedures_observations, doc_procedures_observations, doc_signature_procedures_observations, provider_id_doc_instructions, iv_doc_instructions, medication_and_r_doc_instructions, doc_instructions_signature, days_in_icu, diagnosis, nursing_care_plan, invasive_line_type, date_inserted, invasive_line_date_due_for_change, invasive_line_date_changed)
-                VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id `;
+                VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id`;
     pool.query(queryText, [patient_id, date_of_birth, admission_id, date, time, duty_nurse_provider_id, duty_intensivist_provider_id, physiotherapist_id, provider_id_procedures_observations, doc_procedures_observations, doc_signature_procedures_observations, provider_id_doc_instructions, iv_doc_instructions, medication_and_r_doc_instructions, doc_instructions_signature, days_in_icu, diagnosis, nursing_care_plan, invasive_line_type, date_inserted, invasive_line_date_due_for_change, invasive_line_date_changed])
         .then((result) => {
             console.log('this is the response for general info insertion', result.rows[0].id);
@@ -357,7 +359,7 @@ router.post('/addspecialinv', (req, res, next) => {
 
 //Handles POST to addlabentering to add the lab results inputs to the "laboratory_results" table
 router.post('/addlabentering', (req, res, next) => {
-    console.log('these are the special investigation inputs', req.body);
+    console.log('these are the lab result inputs', req.body);
 
     //pull out the incoming object data
 

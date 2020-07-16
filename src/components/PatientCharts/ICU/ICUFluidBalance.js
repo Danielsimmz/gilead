@@ -26,7 +26,7 @@ class ICUFluidBalance extends Component {
         portovac_under_h2o_drain_output: '',
         stool_drainage_output: '',
         urine_ouput: '',
-        hourly_urine_output: '',
+        pee_hours_output: '',
         nig_aspirate_output: '',
         sg_output: '',
         output_test: '',
@@ -45,25 +45,56 @@ class ICUFluidBalance extends Component {
           this.props.dispatch({
               type: 'FLUID_BALANCE',
               payload: {
-                  patient_id: this.state.patient_id, date_of_birth: this.state.date_of_birth, admission_id: this.state.admission_id, date: this.state.date,
-                  time: this.state.time, intravenous_fluid_intake_type: this.state.intravenous_fluid_intake_type, urine_ouput: this.state.urine_ouput,
-                  intravenous_fluid_intake_amount: this.state.intravenous_fluid_intake_amount, nig_aspirate_output: this.state.nig_aspirate_output, sg_output: this.state.sg_output,
-                  oral_intake_type: this.state.oral_intake_type, oral_intake_amount: this.state.oral_intake_amount, oral_intake_hourly_total: this.state.oral_intake_hourly_total,
-                  gastric_feed_intake_type: this.state.gastric_feed_intake_type, gastric_feed_intake_amount: this.state.gastric_feed_intake_amount,
-                  nasogastric_suction_and_vomitus_output: this.state.nasogastric_suction_and_vomitus_output, hourly_urine_output: this.state.hourly_urine_output, 
-                  portovac_under_h2o_drain_output: this.state.portovac_under_h2o_drain_output, stool_drainage_output: this.state.stool_drainage_output, 
-                  output_test: this.state.output_test, running_output_total: this.state.running_output_total, hourly_balance: this.state.hourly_balance
+                  patient_id: this.state.patient_id, 
+                  date_of_birth: this.state.date_of_birth,
+                 admission_id: this.state.admission_id, 
+                 date: this.state.date,
+                  time: this.state.time, 
+                  intravenous_fluid_intake_type: this.state.intravenous_fluid_intake_type, 
+                  urine_ouput: this.state.urine_ouput,
+                  intravenous_fluid_intake_amount: this.state.intravenous_fluid_intake_amount, 
+                  nig_aspirate_output: this.state.nig_aspirate_output, 
+                  sg_output: this.state.sg_output,
+                  oral_intake_type: this.state.oral_intake_type, 
+                  oral_intake_amount: this.state.oral_intake_amount, 
+                  oral_intake_hourly_total: this.state.oral_intake_hourly_total,
+                  gastric_feed_intake_type: this.state.gastric_feed_intake_type, 
+                  gastric_feed_intake_amount: this.state.gastric_feed_intake_amount,
+                  nasogastric_suction_and_vomitus_output: this.state.nasogastric_suction_and_vomitus_output, 
+                  pee_hours_output: this.state.pee_hours_output,
+                  portovac_under_h2o_drain_output: this.state.portovac_under_h2o_drain_output,
+                   stool_drainage_output: this.state.stool_drainage_output, 
+                  output_test: this.state.output_test, 
+                  running_output_total: this.state.running_output_total, 
+                  hourly_balance: this.state.hourly_balance
               }
 
           });
 
           this.setState({
-             patient_id: this.props.patient.id, date_of_birth: this.props.patient.date_of_birth, admission_id: '', date: '', time: '', intravenous_fluid_intake_type: '',
-            intravenous_fluid_intake_amount: '', oral_intake_type: '', oral_intake_amount: '', oral_intake_hourly_total: '', 
-            gastric_feed_intake_type: '', gastric_feed_intake_amount: '', nasogastric_suction_and_vomitus_output: '', portovac_under_h2o_drain_output: '',
-            stool_drainage_output: '', urine_ouput: '', hourly_urine_output: '', nig_aspirate_output: '',
-            sg_output: '', output_test: '', running_output_total: '', hourly_balance: ''
-          })
+             patient_id: this.props.patient.id, 
+             date_of_birth: this.props.patient.date_of_birth,
+            admission_id: '', 
+            date: '', 
+            time: '', 
+            intravenous_fluid_intake_type: '',
+            intravenous_fluid_intake_amount: '',
+            oral_intake_type: '', 
+            oral_intake_amount: '', 
+            oral_intake_hourly_total: '', 
+            gastric_feed_intake_type: '',
+             gastric_feed_intake_amount: '', 
+             nasogastric_suction_and_vomitus_output: '',
+              portovac_under_h2o_drain_output: '',
+            stool_drainage_output: '', 
+            urine_ouput: '',
+              pee_hours_output: '',
+             nig_aspirate_output: '',
+            sg_output: '',
+             output_test: '', 
+             running_output_total: '', 
+             hourly_balance: ''
+          });
     }
 
 
@@ -157,7 +188,7 @@ class ICUFluidBalance extends Component {
             </Col>
              <Col>
                  <Form.Label> Hourly Urine Output </Form.Label>
-                <Form.Control placeholder="Hourly Urine Output" type="number" name="hourly_urine_ouput" value={this.state.hourly_urine_ouput} onChange={this.handleInputChangeFor('hourly_urine_ouput')}/>
+                <Form.Control placeholder="Hourly Urine Output" type="number" name="pee_hours_output" value={this.state.pee_hours_output} onChange={this.handleInputChangeFor('pee_hours_output')}/>
             </Col>
              <Col>
                 <Form.Label> NIG Aspirate Output </Form.Label>

@@ -142,7 +142,7 @@ class ICUGeneralInfo extends Component {
                 <Form.Control as="select" onChange={(event)=>this.setState({duty_nurse_provider_id: event.target.value})}>
                     <option value="">Pick From Below </option>
                       {(this.props.providerList)? this.props.providerList.map(provider => (
-                    (provider.job_title === 'Nurse') && <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                   <option key={provider.id} value= {provider.id}> {provider.job_title  + provider.first_name+ provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
                         )): ''}
                  </Form.Control>
                  </Col>
@@ -153,7 +153,7 @@ class ICUGeneralInfo extends Component {
                 <Form.Control as="select" onChange={(event)=>this.setState({duty_intensivist_provider_id: event.target.value})}>
                     <option value="">Pick From Below </option>
                       {(this.props.providerList)? this.props.providerList.map(provider => (
-                    (provider.job_title === 'Doctor' || 'Physician') && <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name +  '' + provider.middle_name + '' + provider.last_name +  '' + provider.specialty_title} </option>
+                     <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name +  '' + provider.middle_name + '' + provider.last_name +  '' + provider.specialty_title} </option>
                         )): ''}
                  </Form.Control>
                  </Col>
@@ -163,11 +163,14 @@ class ICUGeneralInfo extends Component {
                 <Form.Control as="select" onChange={(event)=>this.setState({physiotherapist_id: event.target.value})}>
                     <option value="">Pick From Below </option>
                       {(this.props.providerList)? this.props.providerList.map(provider => (
-                    (provider.job_title === 'Physiotherapist') && <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                     <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
                         )): ''}
                  </Form.Control>
                  </Col>
-                    
+                    <Col>
+                      <Form.Label> Days In ICU</Form.Label>
+                      <Form.Control placeholder="Days in ICU" type="number" name="days_in_icu" value={this.state.days_in_icu} onChange={this.handleInputChangeFor('days_in_icu')}/>
+                </Col>
                </Row>
 
                <Row>
@@ -207,7 +210,7 @@ class ICUGeneralInfo extends Component {
                 <Form.Control as="select" onChange={(event)=>this.setState({provider_id_procedures_observations: event.target.value})}>
                     <option value="">Pick From Below </option>
                       {(this.props.providerList)? this.props.providerList.map(provider => (
-                    (provider.job_title === 'Doctor' || 'Physican' || 'Surgeon') && <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                     <option key={provider.id} value= {provider.id}> {provider.job_title + '' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
                         )): ''}
                  </Form.Control>
                  </Col>
@@ -269,7 +272,7 @@ class ICUGeneralInfo extends Component {
                 <Form.Control as="select" onChange={(event)=>this.setState({provider_id_doc_instructions: event.target.value})}>
                     <option value="">Pick From Below </option>
                       {(this.props.providerList)? this.props.providerList.map(provider => (
-                    (provider.job_title === 'Doctor' || 'Physican' || 'Surgeon') && <option value= {provider.id}> {provider.job_title + ' ' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
+                     <option value= {provider.id}> {provider.job_title + ' ' + provider.first_name + '' + provider.middle_name + '' + provider.last_name + '' + provider.specialty_title} </option>
                         )): ''}
                  </Form.Control>
                  </Col>
